@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "16479477632637c9a7": {
@@ -6,11 +15,10 @@
         "164794776393e76b8e-2": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/15.png",
             "slide_link": "",
             "video_background": true,
             "video": "",
-            "subheading": "Subheading",
+            "subheading": "",
             "heading": "Alluring touches of luxury: Fine Jewelry that reflects your style",
             "heading_size": "h1",
             "content": "Bring out the finer things in life: elegant jewelry for special moments.",
@@ -22,7 +30,7 @@
             "overlay_opacity": 58,
             "overlay_gradient": "linear-gradient(349deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 69%)",
             "button_1_text": "SHOP NOW",
-            "button_1_link": "shopify:\/\/collections",
+            "button_1_link": "shopify://collections",
             "button_1_outline": true,
             "button_2_text": "",
             "button_2_link": "",
@@ -108,7 +116,7 @@
           "type": "text",
           "settings": {
             "text": "GET -10% OFF",
-            "link": "shopify:\/\/products\/test-1",
+            "link": "shopify://products/test-1",
             "outline_text": true
           }
         },
@@ -192,7 +200,7 @@
       "settings": {
         "heading": "Explore Products by Category",
         "heading_left": false,
-        "description": "<p>Discover a curated selection of top-quality products as you explore our diverse categories. <\/p>",
+        "description": "<p>Discover a curated selection of top-quality products as you explore our diverse categories. </p>",
         "full_width": true,
         "collection_list": [
           "bestsellers",
@@ -232,7 +240,7 @@
         "text_qxQW6x": {
           "type": "text",
           "settings": {
-            "text": "<p>Learn more About Brand and join a community that embraces authenticity, <br\/>craftsmanship, and a passion for delivering unparalleled experiences.<\/p>",
+            "text": "<p>Learn more About Brand and join a community that embraces authenticity, <br/>craftsmanship, and a passion for delivering unparalleled experiences.</p>",
             "description_size": "medium"
           }
         },
@@ -240,7 +248,7 @@
           "type": "button",
           "settings": {
             "button_text": "Shop Now",
-            "button_link": "shopify:\/\/pages\/contact",
+            "button_link": "shopify://pages/contact",
             "button_outline": false
           }
         }
@@ -253,7 +261,6 @@
       ],
       "settings": {
         "section_width": "grid",
-        "image": "shopify:\/\/shop_images\/hoodh-ahmed-6mzjJDqYU0g-unsplash.jpg",
         "image_parallax": false,
         "desktop_height": "desktop-height-650",
         "mobile_height": "mobile-height-500",
@@ -271,7 +278,6 @@
         "image_YXUiLD": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/10.png",
             "subheading": "",
             "title": "Sophia",
             "text": "",
@@ -284,7 +290,6 @@
         "image_NmtqBX": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/4.png",
             "subheading": "",
             "title": "Ethan",
             "text": "",
@@ -297,7 +302,6 @@
         "image_8Q6AaV": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/6.png",
             "subheading": "",
             "title": "Mason",
             "text": "",
@@ -310,7 +314,6 @@
         "image_a3egdf": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/7.png",
             "subheading": "",
             "title": "Olivia",
             "text": "",
