@@ -1,19 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "heading_font": "archivo_narrow_n6",
+    "heading_font": "manuale_n6",
+    "heading_font_scale": 100,
+    "body_font": "archivo_n4",
+    "body_font_scale": 100,
+    "body_font_line_height_scale": 100,
+    "navigation_font_scale": 100,
     "navigation_uppercase": true,
-    "product_title_uppercase": true,
+    "product_title_font_scale": 100,
+    "product_title_line_height_scale": 100,
+    "product_title_uppercase": false,
+    "button_letter_spacing": 20,
     "button_uppercase": true,
     "color_body_bg": "#f9f6ee",
+    "color_body": "#363636",
     "color_accent": "#151515",
+    "color_border": "#E2E2E2",
+    "color_input_border": "#dedede",
+    "color_announcement_bar_bg": "#626262",
+    "color_header_bg": "#ffffff",
+    "color_header_text": "#151515",
+    "color_header_links": "#151515",
+    "color_header_links_hover": "#151515",
+    "color_header_icons": "#151515",
+    "color_header_border": "#E2E2E2",
+    "solid_button_background": "#151515",
+    "solid_button_label": "#ffffff",
     "outline_button_label": "#151515",
+    "color_price": "#151515",
     "color_dots": "#151515",
+    "color_inventory_instock": "#279A4B",
+    "color_footer_text": "#FFFFFF",
+    "color_footer_link": "#FFFFFF",
+    "color_footer_link_hover": "#FFFFFF",
+    "color_footer_border": "#d9d9d9",
+    "color_footer_bg": "#572ece",
+    "section_spacing_mobile": 50,
     "section_spacing_desktop": 90,
-    "social_facebook_link": "https:\/\/www.facebook.com\/people\/Wildfood_for_pets\/100088607124174\/?mibextid=LQQJ4d",
-    "social_instagram_link": "https:\/\/www.instagram.com\/wildfood_for_pets",
+    "button_border_radius": 50,
+    "social_facebook_link": "https://www.facebook.com/people/Wildfood_for_pets/100088607124174/?mibextid=LQQJ4d",
+    "social_instagram_link": "https://www.instagram.com/wildfood_for_pets",
+    "product_content_alignment": "center",
     "product_aspect_ratio": "adapt",
     "products_hover_images_count": 3,
+    "products_hover_dots": true,
     "enable_quick_add": true,
+    "enable_quick_view": true,
+    "show_products_vendor": false,
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -75,9 +117,9 @@
           "show_language_switcher": true,
           "show_currency_switcher": true,
           "mobile_secondary_menu": "",
-          "mobile_promo_heading": "Alexandre Vauthier A\/W 22 Haute Couture",
+          "mobile_promo_heading": "Alexandre Vauthier A/W 22 Haute Couture",
           "mobile_promo_link_label": "Shop",
-          "mobile_promo_link": "shopify:\/\/collections\/all"
+          "mobile_promo_link": "shopify://collections/all"
         }
       },
       "footer": {
@@ -100,7 +142,7 @@
             "settings": {
               "column_size": "large",
               "title": "",
-              "text": "<p>Add your store address here<\/p>",
+              "text": "<p>Add your store address here</p>",
               "text_size": "large",
               "button_text": "Add button link",
               "button_link": "",
@@ -136,7 +178,7 @@
             "settings": {
               "column_size": "medium",
               "title": "NEWSLETTER",
-              "text": "<p>Add a short description for this newsletter<\/p>"
+              "text": "<p>Add a short description for this newsletter</p>"
             }
           }
         },
@@ -157,9 +199,7 @@
         }
       }
     },
-    "content_for_index": [
-
-    ]
+    "content_for_index": []
   },
   "presets": {
     "Default": {
@@ -231,9 +271,9 @@
             "menu": "main-menu",
             "transparent_header": true,
             "mobile_secondary_menu": "",
-            "mobile_promo_heading": "Alexandre Vauthier A\/W 22 Haute Couture",
+            "mobile_promo_heading": "Alexandre Vauthier A/W 22 Haute Couture",
             "mobile_promo_link_label": "Shop",
-            "mobile_promo_link": "shopify:\/\/collections\/all",
+            "mobile_promo_link": "shopify://collections/all",
             "show_language_switcher": true,
             "show_currency_switcher": true
           }
@@ -258,7 +298,7 @@
               "settings": {
                 "column_size": "large",
                 "title": "",
-                "text": "<p>Add your store address here<\/p>",
+                "text": "<p>Add your store address here</p>",
                 "text_size": "large",
                 "button_text": "Add button link",
                 "button_link": "",
@@ -294,7 +334,7 @@
               "settings": {
                 "column_size": "medium",
                 "title": "NEWSLETTER",
-                "text": "<p>Add a short description for this newsletter<\/p>"
+                "text": "<p>Add a short description for this newsletter</p>"
               }
             }
           },
@@ -315,9 +355,7 @@
           }
         }
       },
-      "content_for_index": [
-
-      ]
+      "content_for_index": []
     },
     "Reinvent": {
       "heading_font": "hope_sans_n6",
@@ -410,20 +448,20 @@
             "c947d47d-abab-4f58-b89e-58ad729f6986"
           ],
           "settings": {
-            "logo": "shopify:\/\/shop_images\/logo.png",
+            "logo": "shopify://shop_images/logo.png",
             "logo_height_range": 36,
             "logo_height_range_mobile": 24,
             "style": "style4",
             "header_shadow": "header--shadow-small",
             "menu": "main-menu",
             "transparent_header": true,
-            "logo_light": "shopify:\/\/shop_images\/logo-w.png",
+            "logo_light": "shopify://shop_images/logo-w.png",
             "show_language_switcher": false,
             "show_currency_switcher": true,
             "mobile_secondary_menu": "company",
-            "mobile_promo_heading": "Alexandre Vauthier A\/W 22 Haute Couture",
+            "mobile_promo_heading": "Alexandre Vauthier A/W 22 Haute Couture",
             "mobile_promo_link_label": "Shop",
-            "mobile_promo_link": "shopify:\/\/collections\/all"
+            "mobile_promo_link": "shopify://collections/all"
           }
         },
         "footer": {
@@ -434,7 +472,7 @@
               "settings": {
                 "column_size": "medium",
                 "title": "NEWSLETTER",
-                "text": "<p>Sign up for our newsletter and receive 10% off your first order!<\/p>"
+                "text": "<p>Sign up for our newsletter and receive 10% off your first order!</p>"
               }
             },
             "f9e6f4c5-6d79-4c47-9dd0-41a187f487ed": {
@@ -442,7 +480,7 @@
               "settings": {
                 "column_size": "small",
                 "title": "",
-                "text": "<p><\/p>",
+                "text": "<p></p>",
                 "text_size": "medium",
                 "button_text": "",
                 "button_link": "",
@@ -490,9 +528,7 @@
           }
         }
       },
-      "content_for_index": [
-
-      ]
+      "content_for_index": []
     },
     "Sunshine": {
       "heading_font": "neue_swift_n6",
@@ -560,10 +596,10 @@
               "type": "megamenu",
               "settings": {
                 "position": "2",
-                "promo_1_image": "shopify:\/\/shop_images\/promotion2.jpg",
+                "promo_1_image": "shopify://shop_images/promotion2.jpg",
                 "promo_1_heading": "Luxury Bras & Undies",
                 "promo_1_link_label": "Shop now",
-                "promo_1_link": "shopify:\/\/collections\/all",
+                "promo_1_link": "shopify://collections/all",
                 "promo_2_heading": "Promotion heading",
                 "promo_2_link_label": "Shop",
                 "promo_2_link": ""
@@ -574,7 +610,7 @@
             "c947d47d-abab-4f58-b89e-58ad729f6986"
           ],
           "settings": {
-            "logo": "shopify:\/\/shop_images\/logo-2x.png",
+            "logo": "shopify://shop_images/logo-2x.png",
             "logo_height_range": 34,
             "logo_height_range_mobile": 34,
             "style": "style1",
@@ -582,10 +618,10 @@
             "menu": "main-menu",
             "transparent_header": false,
             "mobile_secondary_menu": "company",
-            "mobile_promo_image": "shopify:\/\/shop_images\/promotion2.jpg",
+            "mobile_promo_image": "shopify://shop_images/promotion2.jpg",
             "mobile_promo_heading": "LUXURY BRAS & UNDIES",
             "mobile_promo_link_label": "Shop",
-            "mobile_promo_link": "shopify:\/\/collections\/all",
+            "mobile_promo_link": "shopify://collections/all",
             "show_language_switcher": true,
             "show_currency_switcher": true
           }
@@ -598,8 +634,8 @@
               "settings": {
                 "column_size": "large",
                 "title": "",
-                "image": "shopify:\/\/shop_images\/footer-logo.png",
-                "text": "<p>Beauty is perfect in its imperfections, so you just have to go with the imperfections. Money is the most corrosive aspect of life today because it means that all attention to detail is forgotten. <\/p>",
+                "image": "shopify://shop_images/footer-logo.png",
+                "text": "<p>Beauty is perfect in its imperfections, so you just have to go with the imperfections. Money is the most corrosive aspect of life today because it means that all attention to detail is forgotten. </p>",
                 "text_size": "small",
                 "button_text": "",
                 "button_link": "",
@@ -646,9 +682,7 @@
           }
         }
       },
-      "content_for_index": [
-
-      ]
+      "content_for_index": []
     },
     "Mono": {
       "heading_font": "basic_commercial_n7",
@@ -742,7 +776,7 @@
             "0b220934-05c8-49f3-81c9-17468e976ff1"
           ],
           "settings": {
-            "logo": "shopify:\/\/shop_images\/logo.png",
+            "logo": "shopify://shop_images/logo.png",
             "logo_height_range": 24,
             "logo_height_range_mobile": 24,
             "style": "style2",
@@ -750,10 +784,10 @@
             "menu": "main-menu",
             "transparent_header": false,
             "mobile_secondary_menu": "",
-            "mobile_promo_image": "shopify:\/\/shop_images\/img21.jpg",
+            "mobile_promo_image": "shopify://shop_images/img21.jpg",
             "mobile_promo_heading": "Luxury Wallets",
             "mobile_promo_link_label": "Shop",
-            "mobile_promo_link": "shopify:\/\/collections\/all",
+            "mobile_promo_link": "shopify://collections/all",
             "show_language_switcher": true,
             "show_currency_switcher": true
           }
@@ -766,11 +800,11 @@
               "settings": {
                 "column_size": "medium",
                 "title": "",
-                "image": "shopify:\/\/shop_images\/footer-logo.png",
-                "text": "<p>I am not interested in the past, except as the road to the future. I get ideas about what's essential when packing my suitcase.<\/p>",
+                "image": "shopify://shop_images/footer-logo.png",
+                "text": "<p>I am not interested in the past, except as the road to the future. I get ideas about what's essential when packing my suitcase.</p>",
                 "text_size": "small",
                 "button_text": "Our Story",
-                "button_link": "shopify:\/\/pages\/about",
+                "button_link": "shopify://pages/about",
                 "show_social_links": false
               }
             },
@@ -791,7 +825,7 @@
               "settings": {
                 "column_size": "large",
                 "title": "GET IN TOUCH",
-                "text": "<p>8212 E. Glen Creek Street Orchard Park, NY 14127, <br\/>United States of America +1 310 499 7700<\/p>",
+                "text": "<p>8212 E. Glen Creek Street Orchard Park, NY 14127, <br/>United States of America +1 310 499 7700</p>",
                 "text_size": "large",
                 "button_text": "",
                 "button_link": "",
@@ -857,9 +891,7 @@
           }
         }
       },
-      "content_for_index": [
-
-      ]
+      "content_for_index": []
     },
     "Glamour": {
       "heading_font": "chong_modern_n4",
@@ -952,9 +984,9 @@
             "show_language_switcher": true,
             "show_currency_switcher": true,
             "mobile_secondary_menu": "",
-            "mobile_promo_heading": "Alexandre Vauthier A\/W 22 Haute Couture",
+            "mobile_promo_heading": "Alexandre Vauthier A/W 22 Haute Couture",
             "mobile_promo_link_label": "Shop",
-            "mobile_promo_link": "shopify:\/\/collections\/all"
+            "mobile_promo_link": "shopify://collections/all"
           }
         },
         "footer": {
@@ -977,7 +1009,7 @@
               "settings": {
                 "column_size": "large",
                 "title": "",
-                "text": "<p>Add your store address here<\/p>",
+                "text": "<p>Add your store address here</p>",
                 "text_size": "large",
                 "button_text": "Add button link",
                 "button_link": "",
@@ -1013,7 +1045,7 @@
               "settings": {
                 "column_size": "medium",
                 "title": "NEWSLETTER",
-                "text": "<p>Add a short description for this newsletter<\/p>"
+                "text": "<p>Add a short description for this newsletter</p>"
               }
             }
           },
@@ -1034,9 +1066,7 @@
           }
         }
       },
-      "content_for_index": [
-
-      ]
+      "content_for_index": []
     }
   }
 }
