@@ -15,8 +15,6 @@
         "164794776393e76b8e-2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/ango_desktop_11zon.webp",
-            "mobile_image": "shopify://shop_images/ango_mobile_11zon.webp",
             "slide_link": "",
             "video_background": true,
             "video": "",
@@ -144,7 +142,6 @@
         "text_jg6eik",
         "text_DGrtqU"
       ],
-      "disabled": true,
       "settings": {
         "height": "height-auto",
         "full_width": true,
