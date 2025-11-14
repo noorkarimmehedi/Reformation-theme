@@ -40,6 +40,7 @@
       "type": "header",
       "settings": {
         "sticky_header": true,
+        "logo": "shopify://shop_images/Image_9-20-25_at_20.02.png",
         "logo_height_range": 30,
         "logo_height_range_mobile": 30,
         "style": "style1",
