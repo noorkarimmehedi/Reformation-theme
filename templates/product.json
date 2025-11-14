@@ -11,6 +11,7 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
+      "disabled": true,
       "settings": {}
     },
     "main-product": {
@@ -98,13 +99,13 @@
         "full_width": true,
         "enable_sticky_info": true,
         "enable_sticky_add_to_cart": true,
-        "show_taxes_included": true,
+        "show_taxes_included": false,
         "media_layout": "grid",
-        "display_slider_pagination": true,
+        "display_slider_pagination": false,
         "media_aspect_ratio": "adapt",
         "display_captions": true,
         "hide_variants": false,
-        "lightbox": true,
+        "lightbox": false,
         "enable_video_looping": false
       }
     },
