@@ -46,7 +46,7 @@
     "color_footer_bg": "#572ece",
     "section_spacing_mobile": 50,
     "section_spacing_desktop": 90,
-    "button_border_radius": 50,
+    "button_border_radius": 0,
     "social_facebook_link": "https://www.facebook.com/people/Wildfood_for_pets/100088607124174/?mibextid=LQQJ4d",
     "social_instagram_link": "https://www.instagram.com/wildfood_for_pets",
     "product_content_alignment": "center",

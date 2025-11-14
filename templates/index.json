@@ -15,13 +15,15 @@
         "164794776393e76b8e-2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/ango_desktop_11zon.webp",
+            "mobile_image": "shopify://shop_images/ango_mobile_11zon.webp",
             "slide_link": "",
             "video_background": true,
             "video": "",
             "subheading": "",
-            "heading": "Alluring touches of luxury: Fine Jewelry that reflects your style",
+            "heading": "",
             "heading_size": "h1",
-            "content": "Bring out the finer things in life: elegant jewelry for special moments.",
+            "content": "",
             "description_size": "small",
             "content_position": "middle-center",
             "text_alignment": "center",
