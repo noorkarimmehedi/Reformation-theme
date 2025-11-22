@@ -58,6 +58,44 @@
 /* Push the add to cart button to the bottom */
 .product-card--add-to-cart-button {
   margin-top: auto !important;
+  font-size: 17px !important;
+  padding: 10px 25px !important;
+  border-radius: 0.3rem !important;
+  background-image: linear-gradient(rgb(255, 255, 153), rgb(255, 215, 0)) !important;
+  background: linear-gradient(rgb(255, 255, 153), rgb(255, 215, 0)) !important;
+  border: 1px solid #D50000 !important;
+  border-bottom: 4px solid #D50000 !important;
+  box-shadow: 0px 0px 2px 0px rgb(255, 215, 0) !important;
+  transform: translate(0, -3px) !important;
+  cursor: pointer !important;
+  transition: 0.2s !important;
+  transition-timing-function: linear !important;
+  color: Black !important;
+}
+
+.product-card--add-to-cart-button:focus {
+  font-size: 17px !important;
+  padding: 10px 25px !important;
+  border-radius: 0.3rem !important;
+  background-image: linear-gradient(rgb(255, 255, 153), rgb(255, 215, 0)) !important;
+  background: linear-gradient(rgb(255, 255, 153), rgb(255, 215, 0)) !important;
+  border: 1px solid #D50000 !important;
+  border-bottom: 4px solid #D50000 !important;
+  box-shadow: 0px 0px 2px 0px rgb(255, 215, 0) !important;
+  transform: translate(0, -3px) !important;
+  cursor: pointer !important;
+  transition: 0.2s !important;
+  transition-timing-function: linear !important;
+  color: Black !important;
+}
+
+.product-card--add-to-cart-button:active {
+  transform: translate(0, 0) !important;
+  border-bottom: 2px solid rgb(50, 50, 50) !important;
+}
+
+.product-card--add-to-cart-button:hover {
+  box-shadow: 0px 0px 5px 0px rgb(255, 215, 0) !important;
 }
 
 /* Add consistent spacing above the button */
@@ -66,13 +104,21 @@
   padding-top: 12px;
 }
 
-/* Limit vendor text to one line too for consistency */
+/* Fixed height for price section to ensure alignment */
+.product-card-info .price {
+  min-height: 1.5em;
+  margin-bottom: 12px;
+}
+
+/* Ensure vendor has fixed space if shown */
 .product-card-vendor {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: 1.4em;
+  margin-bottom: 8px;
 }
 </style>
 
