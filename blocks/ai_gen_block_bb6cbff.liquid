@@ -2,6 +2,12 @@
 
 {% style %}
   {{ block.settings.logo_font | font_face: font_display: 'swap' }}
+  {{ block.settings.tagline_font | font_face: font_display: 'swap' }}
+  {{ block.settings.about_font | font_face: font_display: 'swap' }}
+  {{ block.settings.nav_title_font | font_face: font_display: 'swap' }}
+  {{ block.settings.nav_link_font | font_face: font_display: 'swap' }}
+  {{ block.settings.newsletter_title_font | font_face: font_display: 'swap' }}
+  {{ block.settings.newsletter_text_font | font_face: font_display: 'swap' }}
 
   .ai-luxury-footer-{{ ai_gen_id }} {
     background-color: {{ block.settings.background_color }};
@@ -67,6 +73,8 @@
     opacity: 0.8;
     margin-bottom: 20px;
     text-align: {{ block.settings.tagline_alignment }};
+    font-family: {{ block.settings.tagline_font.family }}, {{ block.settings.tagline_font.fallback_families }};
+    font-style: {{ block.settings.tagline_font.style }};
   }
 
   .ai-luxury-footer__about-{{ ai_gen_id }} {
@@ -75,6 +83,8 @@
     letter-spacing: 0.3px;
     opacity: 0.7;
     text-align: {{ block.settings.about_alignment }};
+    font-family: {{ block.settings.about_font.family }}, {{ block.settings.about_font.fallback_families }};
+    font-style: {{ block.settings.about_font.style }};
   }
 
   .ai-luxury-footer__nav-{{ ai_gen_id }} {
@@ -94,6 +104,8 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 20px;
+    font-family: {{ block.settings.nav_title_font.family }}, {{ block.settings.nav_title_font.fallback_families }};
+    font-style: {{ block.settings.nav_title_font.style }};
   }
 
   .ai-luxury-footer__nav-list-{{ ai_gen_id }} {
@@ -113,6 +125,8 @@
     letter-spacing: 0.5px;
     transition: opacity 0.3s ease;
     opacity: 0.7;
+    font-family: {{ block.settings.nav_link_font.family }}, {{ block.settings.nav_link_font.fallback_families }};
+    font-style: {{ block.settings.nav_link_font.style }};
   }
 
   .ai-luxury-footer__nav-link-{{ ai_gen_id }}:hover {
@@ -138,6 +152,8 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 15px;
+    font-family: {{ block.settings.newsletter_title_font.family }}, {{ block.settings.newsletter_title_font.fallback_families }};
+    font-style: {{ block.settings.newsletter_title_font.style }};
   }
 
   .ai-luxury-footer__newsletter-text-{{ ai_gen_id }} {
@@ -145,6 +161,8 @@
     letter-spacing: 0.5px;
     opacity: 0.8;
     margin-bottom: 25px;
+    font-family: {{ block.settings.newsletter_text_font.family }}, {{ block.settings.newsletter_text_font.fallback_families }};
+    font-style: {{ block.settings.newsletter_text_font.style }};
   }
 
   .ai-luxury-footer__newsletter-form-{{ ai_gen_id }} {
@@ -669,6 +687,12 @@
       "default": "Timeless elegance, refined craftsmanship"
     },
     {
+      "type": "font_picker",
+      "id": "tagline_font",
+      "label": "Tagline font",
+      "default": "helvetica_n4"
+    },
+    {
       "type": "range",
       "id": "tagline_size",
       "min": 10,
@@ -698,6 +722,12 @@
       "id": "about_text",
       "label": "About text",
       "default": "We are dedicated to bringing you the finest selection of luxury fashion with unparalleled quality and service."
+    },
+    {
+      "type": "font_picker",
+      "id": "about_font",
+      "label": "About text font",
+      "default": "helvetica_n4"
     },
     {
       "type": "range",
@@ -758,6 +788,12 @@
       "label": "Menu 3"
     },
     {
+      "type": "font_picker",
+      "id": "nav_title_font",
+      "label": "Menu title font",
+      "default": "helvetica_n4"
+    },
+    {
       "type": "range",
       "id": "nav_title_size",
       "min": 10,
@@ -766,6 +802,12 @@
       "unit": "px",
       "label": "Menu title size",
       "default": 11
+    },
+    {
+      "type": "font_picker",
+      "id": "nav_link_font",
+      "label": "Menu link font",
+      "default": "helvetica_n4"
     },
     {
       "type": "range",
@@ -804,6 +846,12 @@
       "default": "Newsletter"
     },
     {
+      "type": "font_picker",
+      "id": "newsletter_title_font",
+      "label": "Newsletter title font",
+      "default": "helvetica_n4"
+    },
+    {
       "type": "range",
       "id": "newsletter_title_size",
       "min": 10,
@@ -818,6 +866,12 @@
       "id": "newsletter_text",
       "label": "Description",
       "default": "Subscribe to receive updates, access to exclusive deals, and more."
+    },
+    {
+      "type": "font_picker",
+      "id": "newsletter_text_font",
+      "label": "Newsletter description font",
+      "default": "helvetica_n4"
     },
     {
       "type": "range",
