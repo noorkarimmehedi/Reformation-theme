@@ -387,16 +387,50 @@ function addToCart{{ ai_gen_id }}(variantId) {
     button.textContent = 'Added!';
     
     // Fetch updated cart to get current state
-    return fetch('/cart.js')
+    fetch('/cart.js')
       .then(res => res.json())
       .then(cart => {
-        // Update cart count in header
-        updateCartCount{{ ai_gen_id }}(cart.item_count);
+        console.log('Cart updated, total items:', cart.item_count);
         
-        // Dispatch events for themes that need them (but don't open drawer)
-        document.dispatchEvent(new CustomEvent('cart:item-added', { 
-          bubbles: true,
-          detail: { cart: cart }
+        // Update cart count
+        updateAllCartCounters{{ ai_gen_id }}(cart.item_count);
+        
+        // Fetch header section to force refresh
+        fetch(window.location.href)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Find all cart-related elements in the fetched page
+            const newCartElements = doc.querySelectorAll('[href*="/cart"], [data-cart], .cart, #cart');
+            const currentCartElements = document.querySelectorAll('[href*="/cart"], [data-cart], .cart, #cart');
+            
+            // Update each cart element's count
+            newCartElements.forEach((newEl, index) => {
+              if (currentCartElements[index]) {
+                // Extract and update count from the new element
+                const countMatch = newEl.textContent.match(/\d+/);
+                if (countMatch) {
+                  const countValue = countMatch[0];
+                  // Update corresponding current element
+                  const currentCountElements = currentCartElements[index].querySelectorAll('span, .count, [class*="count"]');
+                  currentCountElements.forEach(el => {
+                    if (el.textContent.match(/\d+/)) {
+                      el.textContent = el.textContent.replace(/\d+/, countValue);
+                    }
+                  });
+                }
+              }
+            });
+            
+            console.log('Header cart elements refreshed');
+          });
+        
+        // Dispatch events
+        document.dispatchEvent(new CustomEvent('cart:updated', { 
+          detail: { cart: cart }, 
+          bubbles: true 
         }));
         
         // Reset button after 2 seconds
@@ -407,7 +441,7 @@ function addToCart{{ ai_gen_id }}(variantId) {
       });
   })
   .catch(error => {
-    console.error('Error:', error);
+    console.error('Error adding to cart:', error);
     button.textContent = 'Error';
     alert('There was an error adding the item to your cart. Please try again.');
     
@@ -419,49 +453,111 @@ function addToCart{{ ai_gen_id }}(variantId) {
   });
 }
 
-function updateCartCount{{ ai_gen_id }}(count) {
-  // Update all possible cart count elements
+function updateAllCartCounters{{ ai_gen_id }}(count) {
+  console.log('Attempting to update cart count to:', count);
+  
+  // Ultra-comprehensive selector list
   const selectors = [
+    // Data attributes
     '[data-cart-count]',
+    '[data-cart-item-count]',
+    '[data-header-cart-count]',
+    '[data-cart-quantity]',
+    '[data-cart-items]',
+    
+    // Class-based
     '.cart-count',
     '.cart__count',
-    '#cart-count',
     '.cart-count-bubble',
-    '[data-header-cart-count]',
-    '.header__icon--cart .count',
-    'cart-icon-bubble',
+    '.count-bubble',
+    '.cart-item-count',
+    '.cart-quantity',
+    '.header-cart-count',
+    '.site-header__cart-count',
     '.cart-link__bubble',
-    '.count-bubble'
+    
+    // ID-based
+    '#cart-count',
+    '#CartCount',
+    '#cart-item-count',
+    
+    // Within cart links
+    'a[href="/cart"] .count',
+    'a[href="/cart"] span',
+    'a[href*="/cart"] .count',
+    'a[href*="/cart"] span',
+    '.cart-link .count',
+    '.cart-link span',
+    
+    // Common patterns
+    '.header__icon--cart .count',
+    '.header__icon--cart span',
+    '.site-header__cart span',
+    '.utility-bar__cart .count',
+    
+    // Reformation theme specific (based on your theme structure)
+    '.header .cart span',
+    '.header [href="/cart"] span',
+    'header .cart-count',
+    'header [data-cart-count]',
+    '#header .cart span',
+    '#header [href="/cart"] span'
   ];
   
+  let updateCount = 0;
+  
   selectors.forEach(selector => {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(el => {
-      el.textContent = count;
-      el.innerText = count;
-      
-      // Show/hide based on count
-      if (count > 0) {
-        el.classList.remove('hidden');
-        el.removeAttribute('hidden');
-        el.style.display = '';
-      } else {
-        el.classList.add('hidden');
-      }
-    });
+    try {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(el => {
+        // Check if element actually contains a number
+        if (el.textContent.trim().match(/^\d+$/) || el.textContent.trim() === '' || el.getAttribute('data-cart-count')) {
+          // Update the element
+          el.textContent = count;
+          el.innerText = count;
+          
+          // Update data attribute
+          if (el.hasAttribute('data-cart-count')) {
+            el.setAttribute('data-cart-count', count);
+          }
+          
+          // Show/hide based on count
+          if (count > 0) {
+            el.classList.remove('hidden', 'hide');
+            el.removeAttribute('hidden');
+            el.style.display = '';
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+          }
+          
+          updateCount++;
+          console.log('✓ Updated:', selector, '→', count);
+        }
+      });
+    } catch (e) {
+      // Silent fail for invalid selectors
+    }
   });
   
-  // Special handling for cart-icon-bubble (Dawn theme)
-  const cartIconBubble = document.querySelector('cart-icon-bubble');
-  if (cartIconBubble) {
-    const bubble = cartIconBubble.querySelector('.cart-count-bubble');
-    if (bubble) {
-      bubble.textContent = count;
-      if (count > 0) {
-        bubble.classList.remove('hidden');
-      }
-    }
+  // If nothing was updated, try a more aggressive approach
+  if (updateCount === 0) {
+    console.warn('No cart counters found with standard selectors. Trying aggressive search...');
+    
+    // Find all links to cart
+    const cartLinks = document.querySelectorAll('a[href="/cart"], a[href*="/cart"]');
+    cartLinks.forEach(link => {
+      // Find any span or number inside
+      const spans = link.querySelectorAll('span, .count, [class*="count"]');
+      spans.forEach(span => {
+        if (span.textContent.trim().match(/^\d+$/)) {
+          span.textContent = count;
+          console.log('✓ Updated via aggressive search:', span);
+        }
+      });
+    });
   }
+  
+  console.log(`Total elements updated: ${updateCount}`);
 }
 </script>
 
