@@ -99,6 +99,8 @@
   .ai-luxury-footer__middle-{{ ai_gen_id }} {
     padding: {{ block.settings.section_spacing }}px 0;
     border-bottom: 1px solid {{ block.settings.border_color }};
+    position: relative;
+    z-index: 1;
   }
 
   .ai-luxury-footer__newsletter-{{ ai_gen_id }} {
@@ -129,6 +131,8 @@
     margin: 0 auto;
     align-items: stretch;
     height: 50px;
+    position: relative;
+    z-index: 1;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
@@ -146,6 +150,8 @@
     box-sizing: border-box;
     -webkit-appearance: none;
     appearance: none;
+    pointer-events: auto;
+    touch-action: manipulation;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::placeholder {
@@ -300,11 +306,15 @@
       padding: 14px 20px;
       font-size: 16px;
       line-height: 1.4;
+      width: 100%;
+      display: block;
     }
 
     .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
       height: 48px;
       line-height: 48px;
+      width: 100%;
+      display: block;
     }
   }
 
