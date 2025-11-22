@@ -274,6 +274,25 @@
     font-size: {{ block.settings.copyright_size }}px;
     letter-spacing: 0.5px;
     opacity: 0.6;
+    text-align: center;
+  }
+
+  .ai-luxury-footer__credit-{{ ai_gen_id }} {
+    font-size: {{ block.settings.copyright_size }}px;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+
+  .ai-luxury-footer__credit-link-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    font-weight: 700;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-luxury-footer__credit-link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
   }
 
   .ai-luxury-footer__payment-{{ ai_gen_id }} {
@@ -535,6 +554,9 @@
 
       <div class="ai-luxury-footer__copyright-{{ ai_gen_id }}">
         {{ block.settings.copyright_text }}
+        <div class="ai-luxury-footer__credit-{{ ai_gen_id }}">
+          Website designed & built by <a href="https://api.whatsapp.com/send/?phone=8801733670129" target="_blank" rel="noopener" class="ai-luxury-footer__credit-link-{{ ai_gen_id }}">Arc Lab Technology</a>
+        </div>
       </div>
 
       {% if block.settings.show_payment_icons %}
