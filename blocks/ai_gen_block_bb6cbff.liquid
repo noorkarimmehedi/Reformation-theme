@@ -280,8 +280,6 @@
   .ai-luxury-footer__credit-{{ ai_gen_id }} {
     font-size: {{ block.settings.copyright_size }}px;
     letter-spacing: 0.5px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-top: 8px;
   }
 
   .ai-luxury-footer__credit-link-{{ ai_gen_id }} {
@@ -548,10 +546,8 @@
       </div>
 
       <div class="ai-luxury-footer__copyright-{{ ai_gen_id }}">
-        {{ block.settings.copyright_text }}
-      </div>
-      <div class="ai-luxury-footer__credit-{{ ai_gen_id }}">
-        Website designed & built by <a href="https://api.whatsapp.com/send/?phone=8801733670129" target="_blank" rel="noopener" class="ai-luxury-footer__credit-link-{{ ai_gen_id }}">Arc Lab Technology</a>
+        {{ block.settings.copyright_text }}<br>
+        <span class="ai-luxury-footer__credit-{{ ai_gen_id }}">Website designed & built by <a href="https://api.whatsapp.com/send/?phone=8801733670129" target="_blank" rel="noopener" class="ai-luxury-footer__credit-link-{{ ai_gen_id }}">Arc Lab Technology</a></span>
       </div>
 
       {% if block.settings.show_payment_icons %}
