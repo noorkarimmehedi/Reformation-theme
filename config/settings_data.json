@@ -57,7 +57,7 @@
     "product_aspect_ratio": "adapt",
     "products_hover_images_count": 3,
     "products_hover_dots": true,
-    "enable_quick_add": false,
+    "enable_quick_add": true,
     "enable_quick_view": true,
     "show_products_vendor": false,
     "show_products_rating": false,
