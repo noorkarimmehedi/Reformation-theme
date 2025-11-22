@@ -37,6 +37,25 @@
     height: auto;
   }
 
+  .ai-luxury-footer__logo-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.logo_text_size }}px;
+    font-weight: {{ block.settings.logo_text_weight }};
+    letter-spacing: {{ block.settings.logo_text_spacing }}px;
+    text-transform: {{ block.settings.logo_text_transform }};
+    margin-bottom: 20px;
+    text-align: {{ block.settings.logo_alignment }};
+  }
+
+  .ai-luxury-footer__logo-text-{{ ai_gen_id }} a {
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-luxury-footer__logo-text-{{ ai_gen_id }} a:hover {
+    opacity: 0.7;
+  }
+
   .ai-luxury-footer__tagline-{{ ai_gen_id }} {
     font-size: {{ block.settings.tagline_size }}px;
     line-height: 1.6;
@@ -273,6 +292,10 @@
       text-align: center;
     }
 
+    .ai-luxury-footer__logo-text-{{ ai_gen_id }} {
+      text-align: center;
+    }
+
     .ai-luxury-footer__tagline-{{ ai_gen_id }} {
       text-align: center;
     }
@@ -338,13 +361,23 @@
       <div class="ai-luxury-footer__logo-section-{{ ai_gen_id }}">
         {% if block.settings.logo %}
           <div class="ai-luxury-footer__logo-{{ ai_gen_id }}">
-            <img
-              src="{{ block.settings.logo | image_url: width: 400 }}"
-              alt="{{ shop.name }}"
-              width="{{ block.settings.logo_width }}"
-              height="auto"
-              loading="lazy"
-            >
+            <a href="{{ routes.root_url }}">
+              <img
+                src="{{ block.settings.logo | image_url: width: 400 }}"
+                alt="{{ shop.name }}"
+                width="{{ block.settings.logo_width }}"
+                height="auto"
+                loading="lazy"
+              >
+            </a>
+          </div>
+        {% elsif block.settings.logo_text != blank %}
+          <div class="ai-luxury-footer__logo-text-{{ ai_gen_id }}">
+            <a href="{{ routes.root_url }}">{{ block.settings.logo_text }}</a>
+          </div>
+        {% else %}
+          <div class="ai-luxury-footer__logo-text-{{ ai_gen_id }}">
+            <a href="{{ routes.root_url }}">{{ shop.name }}</a>
           </div>
         {% endif %}
         {% if block.settings.tagline != blank %}
@@ -531,6 +564,61 @@
       "unit": "px",
       "label": "Logo width",
       "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Logo text (if no image)"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "info": "Displays if no logo image is uploaded. Leave blank to use shop name."
+    },
+    {
+      "type": "range",
+      "id": "logo_text_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo text size",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "logo_text_weight",
+      "label": "Logo text weight",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "logo_text_spacing",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Logo text letter spacing",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "logo_text_transform",
+      "label": "Logo text transform",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "lowercase", "label": "Lowercase" },
+        { "value": "capitalize", "label": "Capitalize" }
+      ],
+      "default": "uppercase"
     },
     {
       "type": "select",
