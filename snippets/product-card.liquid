@@ -58,54 +58,60 @@
 /* Push the add to cart button to the bottom */
 .product-card--add-to-cart-button {
   margin-top: auto !important;
-  display: inline-block !important;
-  padding: 10px 20px !important;
-  font-size: 14px !important;
-  font-weight: bold !important;
+  cursor: pointer !important;
+  background: black !important;
+  background-color: black !important;
+  background-image: none !important;
+  box-shadow: 0px 0px 0px 0 rgba(0,0,0,.70) !important;
+  padding: 12px 24px !important;
+  border-radius: 0px !important;
+  border: 0px !important;
+  color: white !important;
+  font-weight: 500 !important;
   text-align: center !important;
   text-decoration: none !important;
-  color: #fff !important;
-  background-color: #ff5252 !important;
-  background: #ff5252 !important;
-  background-image: none !important;
-  border: 2px solid #000 !important;
-  border-radius: 7px !important;
-  box-shadow: 0px 2px 0px #000 !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer !important;
+  overflow: hidden !important;
+  position: relative !important;
+  display: block !important;
 }
 
 .product-card--add-to-cart-button:focus {
-  display: inline-block !important;
-  padding: 10px 20px !important;
-  font-size: 14px !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  color: #fff !important;
-  background-color: #ff5252 !important;
-  background: #ff5252 !important;
-  background-image: none !important;
-  border: 2px solid #000 !important;
-  border-radius: 7px !important;
-  box-shadow: 0px 2px 0px #000 !important;
-  transition: all 0.3s ease !important;
   cursor: pointer !important;
+  background: black !important;
+  background-color: black !important;
+  background-image: none !important;
+  box-shadow: 0px 0px 0px 0 rgba(0,0,0,.70) !important;
+  padding: 12px 24px !important;
+  border-radius: 0px !important;
+  border: 0px !important;
+  color: white !important;
+  font-weight: 500 !important;
 }
 
-.product-card--add-to-cart-button:hover {
-  background-color: #fff !important;
-  background: #fff !important;
-  color: #ff5252 !important;
-  border: 2px solid #ff5252 !important;
-  box-shadow: 5px 5px 0px #ff5252 !important;
+.product-card--add-to-cart-button-inner {
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-.product-card--add-to-cart-button:active {
-  background-color: #fcf414 !important;
-  background: #fcf414 !important;
-  box-shadow: none !important;
-  transform: translateY(4px) !important;
+.product-card--add-to-cart-text {
+  display: block !important;
+  transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.product-card--add-to-cart-button:hover .product-card--add-to-cart-text {
+  transform: translateY(-1.75em) !important;
+}
+
+.product-card--add-to-cart-text-hover {
+  position: absolute !important;
+  top: 1.75em !important;
+  left: 0 !important;
+  right: 0 !important;
+  transition: top 1.125s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.product-card--add-to-cart-button:hover .product-card--add-to-cart-text-hover {
+  top: 0 !important;
 }
 
 /* Add consistent spacing above the button */
@@ -182,18 +188,30 @@
 			{% if is_purchasable %}
 				<button class="product-card--add-to-cart-button product-card--add-to-cart-button-simple button outline" data-product-id="{{ product_card_product.selected_or_first_available_variant.id }}" tabindex="-1" {% if product_card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
 					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
-					<span class="product-card--add-to-cart-text">
-						{%- if product_card_product.selected_or_first_available_variant.available -%}
-              {{- 'products.product.add_to_cart' | t -}}
-            {%- else -%}
-              {{- 'products.product.sold_out' | t -}}
-            {%- endif -%}
-					</span>
+					<div class="product-card--add-to-cart-button-inner">
+						<span class="product-card--add-to-cart-text">
+							{%- if product_card_product.selected_or_first_available_variant.available -%}
+								{{- 'products.product.add_to_cart' | t -}}
+							{%- else -%}
+								{{- 'products.product.sold_out' | t -}}
+							{%- endif -%}
+						</span>
+						<span class="product-card--add-to-cart-text-hover">
+							{%- if product_card_product.selected_or_first_available_variant.available -%}
+								{{- 'products.product.add_to_cart' | t -}}
+							{%- else -%}
+								{{- 'products.product.sold_out' | t -}}
+							{%- endif -%}
+						</span>
+					</div>
 				</button>
 			{% else %}
 				<quick-view class="product-card--add-to-cart-button button outline" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
 					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
-					<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+					<div class="product-card--add-to-cart-button-inner">
+						<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+						<span class="product-card--add-to-cart-text-hover">{{ 'products.product.choose_options' | t }}</span>
+					</div>
 				</quick-view>
 			{% endif %}
 		{%- endif -%}
@@ -222,7 +240,10 @@
 		{%- if settings.enable_quick_add -%}
 			<quick-view class="product-card--add-to-cart-button button outline" data-product-handle="" tabindex="-1" disabled>
 				<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
-				<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+				<div class="product-card--add-to-cart-button-inner">
+					<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+					<span class="product-card--add-to-cart-text-hover">{{ 'products.product.choose_options' | t }}</span>
+				</div>
 			</quick-view>
 		{%- endif -%}
 	</div>
