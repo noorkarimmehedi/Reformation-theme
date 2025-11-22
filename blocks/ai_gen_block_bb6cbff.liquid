@@ -300,15 +300,17 @@
     }
 
     .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
-      border-right: 1px solid {{ block.settings.border_color }};
-      border-bottom: none;
-      height: 50px;
-      padding: 14px 20px;
-      font-size: 16px;
-      line-height: 1.4;
-      width: 100%;
-      display: block;
-    }
+    border-right: 1px solid {{ block.settings.border_color }};
+    border-bottom: none;
+    height: 50px;
+    padding: 14px 20px;
+    font-size: 16px !important; /* Prevents iOS auto-zoom - must be 16px or larger */
+    line-height: 1.4;
+    width: 100%;
+    display: block;
+    -webkit-text-size-adjust: 100%; /* Prevents text size adjustment */
+    transform: translateZ(0); /* Forces GPU acceleration */
+  }
 
     .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
       height: 48px;
