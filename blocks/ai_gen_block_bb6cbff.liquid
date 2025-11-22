@@ -130,14 +130,13 @@
     max-width: 500px;
     margin: 0 auto;
     align-items: stretch;
-    height: 50px;
     position: relative;
     z-index: 1;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
     flex: 1;
-    padding: 12px 20px;
+    padding: 0 20px;
     background-color: transparent;
     border: 1px solid {{ block.settings.border_color }};
     border-right: none;
@@ -145,37 +144,38 @@
     font-size: 14px;
     letter-spacing: 0.5px;
     min-width: 0;
-    height: 50px;
-    line-height: 1.5;
+    height: 48px;
     box-sizing: border-box;
     -webkit-appearance: none;
     appearance: none;
     pointer-events: auto;
     touch-action: manipulation;
+    margin: 0;
+    border-radius: 0;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::placeholder {
     color: {{ block.settings.text_color }} !important;
-    opacity: 1 !important;
+    opacity: 0.6 !important;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::-webkit-input-placeholder {
     color: {{ block.settings.text_color }} !important;
-    opacity: 1 !important;
+    opacity: 0.6 !important;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::-moz-placeholder {
     color: {{ block.settings.text_color }} !important;
-    opacity: 1 !important;
+    opacity: 0.6 !important;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}:-ms-input-placeholder {
     color: {{ block.settings.text_color }} !important;
-    opacity: 1 !important;
+    opacity: 0.6 !important;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}:focus::placeholder {
-    opacity: 0.5 !important;
+    opacity: 0.3 !important;
   }
 
   .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
@@ -190,9 +190,12 @@
     transition: all 0.3s ease;
     white-space: nowrap;
     flex-shrink: 0;
-    height: 50px;
-    line-height: 50px;
+    height: 48px;
     box-sizing: border-box;
+    margin: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .ai-luxury-footer__newsletter-button-{{ ai_gen_id }}:hover {
@@ -296,25 +299,22 @@
 
     .ai-luxury-footer__newsletter-form-{{ ai_gen_id }} {
       flex-direction: column;
-      height: auto;
+      gap: 0;
     }
 
     .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
-    border-right: 1px solid {{ block.settings.border_color }};
-    border-bottom: none;
-    height: 50px;
-    padding: 14px 20px;
-    font-size: 16px !important; /* Prevents iOS auto-zoom - must be 16px or larger */
-    line-height: 1.4;
-    width: 100%;
-    display: block;
-    -webkit-text-size-adjust: 100%; /* Prevents text size adjustment */
-    transform: translateZ(0); /* Forces GPU acceleration */
-  }
+      border-right: 1px solid {{ block.settings.border_color }};
+      border-bottom: none;
+      height: 48px;
+      padding: 0 20px;
+      font-size: 16px !important;
+      width: 100%;
+      display: block;
+      -webkit-text-size-adjust: 100%;
+    }
 
     .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
       height: 48px;
-      line-height: 48px;
       width: 100%;
       display: block;
     }
@@ -532,18 +532,9 @@
       "id": "logo_alignment",
       "label": "Logo alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
     },
@@ -572,18 +563,9 @@
       "id": "tagline_alignment",
       "label": "Tagline alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
     },
@@ -612,18 +594,9 @@
       "id": "about_alignment",
       "label": "About text alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
     },
