@@ -1,7 +1,3 @@
-{% doc %}
-  @prompt
-    can you design me a footer like Luxury fashion aesthetic: Elegant, minimal, sophisticated (like Chanel, Dior, or The Row), i got these errors: Liquid error (temp/ai_gen_block_a9de0c1 line 333): Invalid form type "arkhqk2jiv0zqau9xyaigenblocka9de0c1crwmq3", must be one of ["product", "storefront_password", "contact", "customer_login", "create_customer", "recover_customer_password", "reset_customer_password", "guest_login", "currency", "activate_customer_password", "customer_address", "new_comment", "customer", "localization", "cart"], Email placeholder text isn't visible also those buttons both isn't in same size on desktop version. add a section to add brief  about us with  customizable alligemnt for both about us and  Tagline, Enter your email address text isn't visible and also for both newsletter Email placeholder and subscribe button it should b e same in size in desktop version. 
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -132,6 +128,7 @@
     max-width: 500px;
     margin: 0 auto;
     align-items: stretch;
+    height: 52px;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
@@ -144,27 +141,32 @@
     font-size: 14px;
     letter-spacing: 0.5px;
     min-width: 0;
-    height: auto;
+    height: 52px;
+    box-sizing: border-box;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::placeholder {
     color: {{ block.settings.text_color }};
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::-webkit-input-placeholder {
     color: {{ block.settings.text_color }};
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}::-moz-placeholder {
     color: {{ block.settings.text_color }};
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}:-ms-input-placeholder {
     color: {{ block.settings.text_color }};
-    opacity: 0.7;
+    opacity: 0.5;
+  }
+
+  .ai-luxury-footer__newsletter-input-{{ ai_gen_id }}:focus::placeholder {
+    opacity: 0.3;
   }
 
   .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
@@ -179,7 +181,8 @@
     transition: all 0.3s ease;
     white-space: nowrap;
     flex-shrink: 0;
-    height: auto;
+    height: 52px;
+    box-sizing: border-box;
   }
 
   .ai-luxury-footer__newsletter-button-{{ ai_gen_id }}:hover {
@@ -283,6 +286,7 @@
 
     .ai-luxury-footer__newsletter-form-{{ ai_gen_id }} {
       flex-direction: column;
+      height: auto;
     }
 
     .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
