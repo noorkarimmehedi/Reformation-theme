@@ -1,482 +1,433 @@
-/* Luxury Fashion Footer Styles */
+{% liquid
+	assign full_width = section.settings.full_width
+	assign copyright_text = section.settings.copyright_text
+	assign show_language_switcher = section.settings.show_language_switcher
+	assign show_currency_switcher = section.settings.show_currency_switcher
+	assign show_payment_icons = section.settings.show_payment_icons
+%}
 
-.footer {
-  background-color: #0a0a0a;
-  color: #e8e8e8;
-  padding: 80px 0 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  letter-spacing: 0.5px;
-  position: relative;
-}
+<link rel="stylesheet" href="{{ 'footer.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'footer.css' | asset_url | stylesheet_tag }}</noscript>
 
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(232, 232, 232, 0.2) 50%, transparent);
-}
+<footer class="footer" id="footer">
+	<div class="row {% if full_width %}full-width-row{% endif %}">
+		{%- for block in section.blocks -%}
+			{% if block.type == 'text' %}
+				{%- liquid
+					assign column_class = 'small-12 medium-4 large-2'
+					case block.settings.column_size
+						when 'medium'
+							assign column_class = 'small-12 medium-3'
+						when 'large'
+							assign column_class = 'small-12 medium-6'
 
-.footer .row {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
+					endcase
+				-%}
+			<div class="{{ column_class | escape }} columns" {{ block.shopify_attributes }}>
+				<div class="widget widget--text">
+					{%- if block.settings.title != blank -%}
+						<div class="thb-widget-title">{{ block.settings.title }}</div>
+					{%- endif -%}
+					{%- if block.settings.image != blank -%}
+						{% assign image = block.settings.image %}
+						{% assign master_width = image.src.width | append: 'x' | append: image.src.height %}
+						{%- render 'responsive-image', image: image, sizes: master_width, retina: 1 -%}
+					{%- endif -%}
+					{%- if block.settings.text != blank -%}
+						<div class="rte text-size--{{ block.settings.text_size }}">
+							{{ block.settings.text }}
+						</div>
+					{%- endif -%}
+					{%- if block.settings.button_text != blank -%}
+						<a class="text-button" href="{{ block.settings.button_link }}" role="button" title="{{ block.settings.button_text | escape }}">{{ block.settings.button_text }}</a>
+					{%- endif -%}
+					{%- if block.settings.show_social_links -%}
+						{%- render 'social-links' -%}
+					{%- endif -%}
+				</div>
+			</div>
+			{% endif %}
+			{%- if block.type == 'menu' -%}
+				{%- liquid
+					assign column_class = 'small-12 medium-4 large-2'
+					case block.settings.column_size
+						when 'medium'
+							assign column_class = 'small-12 medium-3'
+						when 'large'
+							assign column_class = 'small-12 medium-6'
+					endcase
+				-%}
+			<div class="{{ column_class | escape }} columns widget--menu-column" {{ block.shopify_attributes }}>
+				<div class="widget widget--menu">
+					<button class="thb-widget-title collapsible" tabindex="0">{{ block.settings.title }} <span></span></button>
+					{%- if block.settings.menu != blank -%}
+					<ul class="thb-widget-menu">
+					  {% for link in block.settings.menu.links %}
+						  {% assign has_sub_menu = false %}
+						  {% if link.links.size > 0 %}
+						    {% assign has_sub_menu = true %}
+							{% endif %}
+						  <li class="{% if has_sub_menu %}menu-item-has-children{% endif %}{% if link.active %} active{% endif %}">
+						    <a href="{{ link.url }}" title="{{ link.title | escape }}"{%- if link.active %} aria-current="page"{% endif -%}>{{ link.title }}</a>{% if has_sub_menu %}<span class="thb-arrow" tabindex="0">{%- render 'svg-icons' with 'thb-dropdown-bottom' -%}</span>{% endif %}
+						    {% if has_sub_menu %}
+							    <ul class="sub-menu" tabindex="-1">
+						        {% for l in link.links %}
+											{% assign has_sub_menu = false %}
+										  {% if l.links.size > 0 %}
+										    {% assign has_sub_menu = true %}
+											{% endif %}
+							        <li class="{% if has_sub_menu %}menu-item-has-children{% endif %}{% if l.active %} active{% endif %}" role="none">
+							          <a href="{{ l.url }}" title="{{ l.title | escape }}" role="menuitem">{{ l.title }}</a>{% if has_sub_menu %}<span class="thb-arrow" tabindex="0">{%- render 'svg-icons' with 'thb-dropdown-bottom' -%}</span>{% endif %}
+												{% if has_sub_menu %}
+													<ul class="sub-menu" role="menu">
+														{% for sub_link in l.links %}
+															{% assign has_sub_menu = false %}
+															{% if sub_link.links.size > 0 %}
+																{% assign has_sub_menu = true %}
+															{% endif %}
+															<li class="{% if has_sub_menu %}menu-item-has-children{% endif %}{% if sub_link.active %} active{% endif %}" role="none">
+																<a href="{{ sub_link.url }}" title="{{ sub_link.title | escape }}" role="menuitem">{{ sub_link.title }}</a>
+															</li>
+														{% endfor %}
+													</ul>
+												{% endif %}
+							        </li>
+										{% endfor %}
+							    </ul>
+						    {% endif %}
+						  </li>
+					  {% endfor %}
+					</ul>
+					{%- endif -%}
+				</div>
+			</div>
+			{%- endif -%}
+			{%- if block.type == 'signup' -%}
+				{%- liquid
+					assign column_class = 'small-12 medium-4 large-2'
+					case block.settings.column_size
+						when 'medium'
+							assign column_class = 'small-12 medium-3'
+						when 'large'
+							assign column_class = 'small-12 medium-6'
 
-.footer .columns {
-  margin-bottom: 60px;
-}
+					endcase
+				-%}
+				<div class="{{ column_class | escape }} columns" {{ block.shopify_attributes }}>
+					<div class="widget widget--signup">
+						{% if block.settings.title != blank %}
+							<div class="thb-widget-title">{{ block.settings.title }}</div>
+						{% endif %}
+						{% if block.settings.text != blank %}
+							{{ block.settings.text }}
+						{% endif %}
+						{% render 'email-signup-form' %}
+					</div>
+				</div>
+			{%- endif -%}
+			{%- if block.type == 'social' -%}
+				{%- liquid
+					assign column_class = 'small-6 medium-4 large-2'
+					case block.settings.column_size
+						when 'medium'
+							assign column_class = 'small-12 medium-3'
+						when 'large'
+							assign column_class = 'small-12 medium-6'
 
-/* Widget Styles */
-.widget {
-  padding: 0 20px;
-}
+					endcase
+				-%}
+				<div class="{{ column_class | escape }} columns" {{ block.shopify_attributes }}>
+					<div class="widget widget--social">
+						{% if block.settings.title != blank %}
+							<div class="thb-widget-title">{{ block.settings.title }}</div>
+						{% endif %}
+						{% render 'social-links' %}
+					</div>
+				</div>
+			{%- endif -%}
+			{%- if block.type == 'custom_liquid' -%}
+				{%- liquid
+					assign column_class = 'small-6 medium-4 large-2'
+					case block.settings.column_size
+						when 'medium'
+							assign column_class = 'small-12 medium-3'
+						when 'large'
+							assign column_class = 'small-12 medium-6'
 
-.thb-widget-title {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-  color: #ffffff;
-  position: relative;
-  padding-bottom: 15px;
-}
+					endcase
+				-%}
+				<div class="{{ column_class | escape }} columns" {{ block.shopify_attributes }}>
+					<div class="widget widget--custom">
+						{% if block.settings.title != blank %}
+							<div class="thb-widget-title">{{ block.settings.title }}</div>
+						{% endif %}
+						{{ block.settings.custom_liquid }}
+					</div>
+				</div>
+			{%- endif -%}
+		{%- endfor -%}
+	</div>
+	<div class="sub-footer">
+		<div class="row {% if full_width %}full-width-row{% endif %}">
+			<div class="small-12 medium-8 columns">
+				{% render 'localization', id: 'FooterLocalization', show_language_switcher: show_language_switcher, show_currency_switcher: show_currency_switcher %}
+			</div>
+			<div class="small-12 medium-4 columns">
+				{%- if show_payment_icons -%}
+				<div class="footer-payment-icons">
+        {%- unless shop.enabled_payment_types == empty -%}
+          {%- for type in shop.enabled_payment_types -%}
+            <figure>{{ type | payment_type_svg_tag: class: 'payment-icons__icon' }}</figure>
+          {%- endfor -%}
+        {%- endunless -%}
+        </div>
+				{%- endif -%}
+			</div>
+			<div class="small-12 columns">
+				<p>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}, {{ copyright_text }} {{ powered_by_link }}</p>
+				{%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+          <div class="footer--follow-on-shop">
+            {{ shop | login_button: action: 'follow' }}
+          </div>
+        {%- endif -%}
+			</div>
+		</div>
+	</div>
+</footer>
 
-.thb-widget-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  height: 1px;
-  background-color: #ffffff;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.widget:hover .thb-widget-title::after {
-  width: 60px;
-}
-
-/* Text Widget */
-.widget--text .rte {
-  font-size: 13px;
-  line-height: 1.8;
-  color: #b8b8b8;
-  font-weight: 300;
-}
-
-.widget--text .rte p {
-  margin-bottom: 15px;
-}
-
-.widget--text img {
-  max-width: 180px;
-  margin-bottom: 25px;
-  opacity: 0.95;
-  transition: opacity 0.3s ease;
-}
-
-.widget--text img:hover {
-  opacity: 1;
-}
-
-/* Text Button */
-.text-button {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  padding: 12px 0;
-  position: relative;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-}
-
-.text-button::after {
-  content: '→';
-  margin-left: 8px;
-  display: inline-block;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.text-button:hover {
-  color: #ffffff;
-  letter-spacing: 2px;
-}
-
-.text-button:hover::after {
-  transform: translateX(5px);
-}
-
-/* Menu Widget */
-.widget--menu .thb-widget-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.widget--menu .thb-widget-menu > li {
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.widget--menu .thb-widget-menu a {
-  font-size: 13px;
-  color: #b8b8b8;
-  text-decoration: none;
-  font-weight: 300;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-block;
-  position: relative;
-}
-
-.widget--menu .thb-widget-menu a::before {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: #ffffff;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.widget--menu .thb-widget-menu a:hover {
-  color: #ffffff;
-  transform: translateX(3px);
-}
-
-.widget--menu .thb-widget-menu a:hover::before {
-  width: 100%;
-}
-
-.widget--menu .thb-widget-menu .active > a {
-  color: #ffffff;
-}
-
-/* Collapsible Title (Mobile) */
-.widget--menu .thb-widget-title.collapsible {
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.widget--menu .thb-widget-title.collapsible span::before {
-  content: '+';
-  font-size: 14px;
-  font-weight: 300;
-  transition: transform 0.3s ease;
-}
-
-.widget--menu .thb-widget-title.collapsible.active span::before {
-  content: '−';
-}
-
-/* Social Links */
-.widget--social .social-links,
-.social-links {
-  display: flex;
-  gap: 20px;
-  margin-top: 25px;
-}
-
-.social-links a {
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(232, 232, 232, 0.2);
-  border-radius: 50%;
-  color: #b8b8b8;
-  text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.social-links a::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background-color: #ffffff;
-  transform: translate(-50%, -50%);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 0;
-}
-
-.social-links a:hover {
-  border-color: #ffffff;
-  color: #0a0a0a;
-  transform: translateY(-3px);
-}
-
-.social-links a:hover::before {
-  width: 100%;
-  height: 100%;
-}
-
-.social-links a svg {
-  width: 16px;
-  height: 16px;
-  position: relative;
-  z-index: 1;
-  transition: all 0.4s ease;
-}
-
-/* Email Signup */
-.widget--signup .rte {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #b8b8b8;
-  margin-bottom: 25px;
-  font-weight: 300;
-}
-
-.email-signup-form {
-  position: relative;
-}
-
-.email-signup-form input[type="email"] {
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(232, 232, 232, 0.3);
-  color: #ffffff;
-  font-size: 13px;
-  padding: 12px 0;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  transition: border-color 0.3s ease;
-}
-
-.email-signup-form input[type="email"]:focus {
-  outline: none;
-  border-bottom-color: #ffffff;
-}
-
-.email-signup-form input[type="email"]::placeholder {
-  color: #666666;
-  font-weight: 300;
-}
-
-.email-signup-form button {
-  position: absolute;
-  right: 0;
-  bottom: 8px;
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 5px 0;
-  transition: all 0.3s ease;
-}
-
-.email-signup-form button:hover {
-  transform: translateX(3px);
-  letter-spacing: 2px;
-}
-
-/* Sub Footer */
-.sub-footer {
-  margin-top: 40px;
-  padding: 40px 0;
-  border-top: 1px solid rgba(232, 232, 232, 0.1);
-}
-
-.sub-footer p {
-  font-size: 11px;
-  color: #666666;
-  letter-spacing: 1px;
-  margin: 20px 0;
-  font-weight: 300;
-}
-
-.sub-footer a {
-  color: #b8b8b8;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.sub-footer a:hover {
-  color: #ffffff;
-}
-
-/* Localization (Language/Currency Switcher) */
-.localization-form {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.localization-form select {
-  background-color: transparent;
-  border: 1px solid rgba(232, 232, 232, 0.2);
-  color: #b8b8b8;
-  font-size: 11px;
-  padding: 8px 30px 8px 15px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 300;
-}
-
-.localization-form select:hover {
-  border-color: #ffffff;
-  color: #ffffff;
-}
-
-.localization-form select:focus {
-  outline: none;
-  border-color: #ffffff;
-}
-
-/* Payment Icons */
-.footer-payment-icons {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.footer-payment-icons figure {
-  margin: 0;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-.footer-payment-icons figure:hover {
-  opacity: 0.8;
-}
-
-.payment-icons__icon {
-  height: 24px;
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-
-/* Follow on Shop */
-.footer--follow-on-shop {
-  margin-top: 20px;
-}
-
-.footer--follow-on-shop .shopify-follow-on-shop-button {
-  background-color: transparent !important;
-  border: 1px solid rgba(232, 232, 232, 0.3) !important;
-  transition: all 0.3s ease !important;
-}
-
-.footer--follow-on-shop .shopify-follow-on-shop-button:hover {
-  border-color: #ffffff !important;
-  transform: translateY(-2px);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .footer {
-    padding: 60px 0 0;
+{% schema %}
+  {
+		"name": "Footer",
+		"settings": [
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"default": false,
+				"label": "Make section full width"
+			},
+      {
+        "type": "text",
+        "id": "copyright_text",
+        "label": "Additional copyright text",
+        "default": "All rights reserved."
+      },
+			{
+        "type": "checkbox",
+        "id": "show_language_switcher",
+        "label": "Enable language switcher",
+        "default": true,
+				"info": "To add a language, go to your [language settings](/admin/settings/languages)."
+      },
+			{
+        "type": "checkbox",
+        "id": "show_currency_switcher",
+        "label": "Enable currency switcher",
+        "default": true,
+				"info": "To add a country/region, go to your [payment settings](/admin/settings/payments)."
+      },
+			{
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": true,
+				"info": "By default your theme shows the icons that are associated with the payment gateway you have enabled in the [payment settings](/admin/settings/payments)."
+      },
+			{
+	      "type": "header",
+	      "content": "Follow on Shop",
+	      "info": "To allow customers to follow your store on the Shop app from your storefront, Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+	    },
+			{
+	      "type": "checkbox",
+	      "id": "enable_follow_on_shop",
+	      "default": true,
+	      "label": "Enable Follow on Shop"
+	    }
+		],
+		"blocks": [
+			{
+	      "type": "@app"
+	    },
+			{
+        "type": "text",
+        "name": "Text",
+				"settings": [
+					{
+						 "type": "select",
+						 "id": "column_size",
+						 "label": "Column size",
+						 "options": [
+							 { "value": "small", "label": "Small" },
+							 { "value": "medium", "label": "Medium" },
+							 { "value": "large", "label": "Large" }
+						 ],
+						 "default": "small"
+					},
+					{
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+					{
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+						"info": "240 x 100 px .png recommended."
+          },
+					{
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Add company info here.</p>"
+          },
+					{
+						"type": "select",
+						"id": "text_size",
+						"label": "Text size",
+						"options": [
+							{
+								"value": "small",
+								"label": "Small"
+							},
+							{
+								"value": "medium",
+								"label": "Medium"
+							},
+							{
+								"value": "large",
+								"label": "Large"
+							}
+						],
+						"default": "medium"
+					},
+					{
+            "id": "button_text",
+            "type": "text",
+            "label": "Button label",
+            "default": "Explore",
+						"info": "Leave the label blank to hide the button."
+          },
+          {
+            "id": "button_link",
+            "type": "url",
+            "label": "Button link"
+          },
+					{
+		        "type": "checkbox",
+		        "id": "show_social_links",
+		        "label": "Show social links",
+		        "default": true
+		      }
+				]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+				"settings": [
+					{
+						 "type": "select",
+						 "id": "column_size",
+						 "label": "Column size",
+						 "options": [
+							 { "value": "small", "label": "Small" },
+							 { "value": "medium", "label": "Medium" },
+							 { "value": "large", "label": "Large" }
+						 ],
+						 "default": "small"
+					},
+					{
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+					{
+						"type": "link_list",
+						"id": "menu",
+						"default": "footer",
+						"label": "Menu",
+						"info": "Select navigation to display"
+					}
+				]
+      },
+			{
+        "type": "social",
+        "name": "Social links",
+				"settings": [
+					{
+						 "type": "select",
+						 "id": "column_size",
+						 "label": "Column size",
+						 "options": [
+							 { "value": "small", "label": "Small" },
+							 { "value": "medium", "label": "Medium" },
+							 { "value": "large", "label": "Large" }
+						 ],
+						 "default": "small"
+					},
+					{
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          }
+				]
+      },
+			{
+        "type": "signup",
+        "name": "Email signup",
+				"limit": 1,
+				"settings": [
+					{
+						 "type": "select",
+						 "id": "column_size",
+						 "label": "Column size",
+						 "options": [
+							 { "value": "small", "label": "Small" },
+							 { "value": "medium", "label": "Medium" },
+							 { "value": "large", "label": "Large" }
+						 ],
+						 "default": "small"
+					},
+					{
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+					{
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Add a text to attract more customers to <strong>sign up!</strong></p>"
+          }
+				]
+      },
+			{
+        "type": "custom_liquid",
+        "name": "Custom liquid",
+				"settings": [
+					{
+						 "type": "select",
+						 "id": "column_size",
+						 "label": "Column size",
+						 "options": [
+							 { "value": "small", "label": "Small" },
+							 { "value": "medium", "label": "Medium" },
+							 { "value": "large", "label": "Large" }
+						 ],
+						 "default": "small"
+					},
+					{
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+					{
+						"type": "liquid",
+						"id": "custom_liquid",
+						"label": "Custom liquid",
+						"info": "Add app snippets or other Liquid code to create advanced customizations."
+					}
+				]
+      }
+    ]
   }
-  
-  .footer .row {
-    padding: 0 20px;
-  }
-  
-  .widget {
-    padding: 0 10px;
-  }
-  
-  .footer .columns {
-    margin-bottom: 45px;
-  }
-  
-  .thb-widget-title {
-    font-size: 12px;
-    margin-bottom: 20px;
-  }
-  
-  .social-links {
-    gap: 15px;
-  }
-  
-  .footer-payment-icons {
-    justify-content: flex-start;
-    margin-top: 20px;
-  }
-}
-
-/* Smooth Scrolling & Animations */
-@media (prefers-reduced-motion: no-preference) {
-  .footer * {
-    transition-duration: 0.3s;
-  }
-}
-
-/* Text Size Variations */
-.text-size--small {
-  font-size: 12px;
-}
-
-.text-size--medium {
-  font-size: 13px;
-}
-
-.text-size--large {
-  font-size: 14px;
-}
-
-/* Sub-menu Styles */
-.widget--menu .sub-menu {
-  list-style: none;
-  margin-top: 10px;
-  margin-left: 15px;
-  padding-left: 15px;
-  border-left: 1px solid rgba(232, 232, 232, 0.1);
-}
-
-.widget--menu .sub-menu li {
-  margin-bottom: 8px;
-}
-
-.widget--menu .sub-menu a {
-  font-size: 12px;
-  color: #888888;
-}
-
-.widget--menu .sub-menu a:hover {
-  color: #ffffff;
-}
-
-/* Full Width Option */
-.full-width-row {
-  max-width: 100% !important;
-  padding-left: 60px !important;
-  padding-right: 60px !important;
-}
-
-@media (max-width: 768px) {
-  .full-width-row {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-}
+{% endschema %}
