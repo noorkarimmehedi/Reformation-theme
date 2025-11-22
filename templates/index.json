@@ -109,6 +109,56 @@
         "disable_bottom_spacing": true
       }
     },
+    "scrolling_text_QYgW7b": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text_DdkCYP": {
+          "type": "text",
+          "settings": {
+            "text": "Add campaign text here.",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_7A4mAe": {
+          "type": "text",
+          "settings": {
+            "text": "Add campaign text here.",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_bPG3dM": {
+          "type": "text",
+          "settings": {
+            "text": "Add campaign text here.",
+            "link": "",
+            "outline_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_DdkCYP",
+        "text_7A4mAe",
+        "text_bPG3dM"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "height": "height-auto",
+        "full_width": true,
+        "direction": "left",
+        "speed": "20s",
+        "text_size": 24,
+        "text_uppercase": false,
+        "image_size": "large",
+        "color_bg": "#f5f3ef",
+        "color_text": "#151515",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
     "scrolling_text_w6EXfN": {
       "type": "scrolling-text",
       "blocks": {
@@ -117,7 +167,7 @@
           "settings": {
             "text": "GET -10% OFF",
             "link": "shopify://products/test-1",
-            "outline_text": true
+            "outline_text": false
           }
         },
         "text_jg6eik": {
@@ -133,7 +183,7 @@
           "settings": {
             "text": "GET -50% OFF",
             "link": "",
-            "outline_text": true
+            "outline_text": false
           }
         }
       },
@@ -142,6 +192,7 @@
         "text_jg6eik",
         "text_DGrtqU"
       ],
+      "disabled": true,
       "settings": {
         "height": "height-auto",
         "full_width": true,
@@ -347,6 +398,7 @@
   },
   "order": [
     "16479477632637c9a7",
+    "scrolling_text_QYgW7b",
     "scrolling_text_w6EXfN",
     "46322c5c-3347-49a0-b4b9-a5f2ad634b2c",
     "collection_list_FaLtCA",
