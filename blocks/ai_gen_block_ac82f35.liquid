@@ -386,38 +386,81 @@ function addToCart{{ ai_gen_id }}(variantId) {
     // Show success message
     button.textContent = 'Added!';
     
-    // Try different methods to open cart drawer based on theme
-    setTimeout(() => {
-      // Method 1: Check for common theme cart drawer functions
-      if (typeof Shopify !== 'undefined' && Shopify.theme && typeof Shopify.theme.openCart === 'function') {
-        Shopify.theme.openCart();
-      }
-      // Method 2: Check for Dawn theme
-      else if (document.querySelector('cart-drawer')) {
-        const cartDrawer = document.querySelector('cart-drawer');
-        if (cartDrawer && typeof cartDrawer.open === 'function') {
-          cartDrawer.open();
-        }
-      }
-      // Method 3: Try to trigger a cart update event
-      else if (typeof window.dispatchEvent === 'function') {
-        window.dispatchEvent(new CustomEvent('cart:refresh'));
-        document.dispatchEvent(new CustomEvent('cart:updated'));
-      }
-      // Method 4: Look for cart icon and trigger click
-      else {
-        const cartIcon = document.querySelector('a[href="/cart"], .cart-link, #cart-icon-bubble');
-        if (cartIcon) {
-          cartIcon.click();
-        }
-      }
-      
-      // Reset button after 2 seconds
-      setTimeout(() => {
-        button.disabled = false;
-        button.textContent = originalText;
-      }, 2000);
-    }, 500);
+    // Fetch updated cart to get current state
+    return fetch('/cart.js')
+      .then(res => res.json())
+      .then(cart => {
+        // Update cart count in header
+        updateCartCount{{ ai_gen_id }}(cart.item_count);
+        
+        // Try different methods to open cart drawer and refresh it
+        setTimeout(() => {
+          // Method 1: Dawn theme cart drawer
+          const cartDrawer = document.querySelector('cart-drawer');
+          if (cartDrawer) {
+            if (typeof cartDrawer.renderContents === 'function') {
+              fetch('/cart?section_id=cart-drawer')
+                .then(res => res.text())
+                .then(html => {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(html, 'text/html');
+                  const newContent = doc.querySelector('cart-drawer');
+                  if (newContent && cartDrawer.querySelector('.drawer__inner')) {
+                    cartDrawer.querySelector('.drawer__inner').innerHTML = newContent.querySelector('.drawer__inner').innerHTML;
+                  }
+                });
+            }
+            if (typeof cartDrawer.open === 'function') {
+              cartDrawer.open();
+            } else {
+              cartDrawer.classList.add('active', 'animate');
+            }
+          }
+          // Method 2: Standard cart drawer
+          else {
+            const drawer = document.querySelector('.cart-drawer, #cart-drawer, [data-cart-drawer]');
+            if (drawer) {
+              drawer.classList.add('active', 'is-open');
+            }
+          }
+          
+          // Method 3: Dispatch custom events for theme compatibility
+          document.dispatchEvent(new CustomEvent('cart:refresh', { 
+            bubbles: true,
+            detail: { cart: cart }
+          }));
+          
+          window.dispatchEvent(new CustomEvent('cart:updated', { 
+            bubbles: true,
+            detail: { cart: cart }
+          }));
+          
+          // Method 4: Trigger theme-specific refresh
+          if (typeof Shopify !== 'undefined') {
+            if (Shopify.theme && typeof Shopify.theme.cart !== 'undefined') {
+              if (typeof Shopify.theme.cart.refresh === 'function') {
+                Shopify.theme.cart.refresh();
+              }
+            }
+          }
+          
+          // Method 5: For themes that use fetch to update cart
+          const cartCountElements = document.querySelectorAll('[data-cart-count], .cart-count, .cart__count, #cart-count');
+          cartCountElements.forEach(el => {
+            el.textContent = cart.item_count;
+            if (cart.item_count > 0) {
+              el.classList.remove('hidden');
+              el.style.display = '';
+            }
+          });
+          
+          // Reset button after 2 seconds
+          setTimeout(() => {
+            button.disabled = false;
+            button.textContent = originalText;
+          }, 2000);
+        }, 300);
+      });
   })
   .catch(error => {
     console.error('Error:', error);
@@ -430,6 +473,50 @@ function addToCart{{ ai_gen_id }}(variantId) {
       button.textContent = originalText;
     }, 2000);
   });
+}
+
+function updateCartCount{{ ai_gen_id }}(count) {
+  // Update all possible cart count elements
+  const selectors = [
+    '[data-cart-count]',
+    '.cart-count',
+    '.cart__count',
+    '#cart-count',
+    '.cart-count-bubble',
+    '[data-header-cart-count]',
+    '.header__icon--cart .count',
+    'cart-icon-bubble',
+    '.cart-link__bubble'
+  ];
+  
+  selectors.forEach(selector => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => {
+      el.textContent = count;
+      el.innerText = count;
+      
+      // Show/hide based on count
+      if (count > 0) {
+        el.classList.remove('hidden');
+        el.removeAttribute('hidden');
+        el.style.display = '';
+      } else {
+        el.classList.add('hidden');
+      }
+    });
+  });
+  
+  // Special handling for cart-icon-bubble (Dawn theme)
+  const cartIconBubble = document.querySelector('cart-icon-bubble');
+  if (cartIconBubble) {
+    const bubble = cartIconBubble.querySelector('.cart-count-bubble');
+    if (bubble) {
+      bubble.textContent = count;
+      if (count > 0) {
+        bubble.classList.remove('hidden');
+      }
+    }
+  }
 }
 </script>
 
