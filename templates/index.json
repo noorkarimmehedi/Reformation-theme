@@ -253,7 +253,7 @@
         "ai_gen_block_ac82f35_byVcX4": {
           "type": "ai_gen_block_ac82f35",
           "settings": {
-            "section_title": "YOU MAY ALSO LIKE",
+            "section_title": "BEST SELLERS",
             "collection": "all-products",
             "background_color": "#ffffff",
             "section_padding": 60,
@@ -263,7 +263,7 @@
             "title_letter_spacing": 1.5,
             "title_color": "#363636",
             "header_spacing": 40,
-            "button_text": "DISCOVER MORE",
+            "button_text": "VIEW ALL",
             "button_link": "",
             "button_font": "system_ui_n4",
             "button_size": 11,
@@ -306,7 +306,7 @@
             "card_shadow_opacity": 0,
             "card_content_padding": 16,
             "product_name_font": "system_ui_n4",
-            "product_name_size": 13,
+            "product_name_size": 12,
             "product_name_spacing": 1,
             "product_name_color": "#000000",
             "price_font": "system_ui_n4",
