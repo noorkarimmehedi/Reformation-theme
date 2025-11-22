@@ -259,7 +259,7 @@
             "section_padding": 60,
             "container_padding": 20,
             "title_font": "system_ui_n4",
-            "title_size": 12,
+            "title_size": 14,
             "title_letter_spacing": 1.5,
             "title_color": "#363636",
             "header_spacing": 40,
