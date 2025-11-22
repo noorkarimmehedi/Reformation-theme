@@ -15,6 +15,7 @@
         "164794776393e76b8e-2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Mobile-View-Web-cover-Ash.png",
             "slide_link": "",
             "video_background": true,
             "video": "",
@@ -27,11 +28,11 @@
             "text_alignment": "center",
             "content_size": "large",
             "overlay_color": "#000000",
-            "overlay_opacity": 58,
-            "overlay_gradient": "linear-gradient(349deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 69%)",
+            "overlay_opacity": 10,
+            "overlay_gradient": "linear-gradient(349deg, rgba(255, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 69%)",
             "button_1_text": "SHOP BESR SELLERS",
             "button_1_link": "shopify://collections",
-            "button_1_outline": true,
+            "button_1_outline": false,
             "button_2_text": "",
             "button_2_link": "",
             "button_2_outline": false
