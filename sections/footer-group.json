@@ -11,6 +11,62 @@
   "type": "header",
   "name": "Footer group",
   "sections": {
+    "17638192526461a72e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_bb6cbff_y7Rnny": {
+          "type": "ai_gen_block_bb6cbff",
+          "settings": {
+            "logo_width": 150,
+            "logo_alignment": "left",
+            "tagline": "Timeless elegance, refined craftsmanship",
+            "tagline_size": 13,
+            "tagline_alignment": "left",
+            "about_text": "We are dedicated to bringing you the finest selection of luxury fashion with unparalleled quality and service.",
+            "about_size": 12,
+            "about_alignment": "left",
+            "menu_1_title": "Shop",
+            "menu_1": "",
+            "menu_2_title": "About",
+            "menu_2": "",
+            "menu_3_title": "Support",
+            "menu_3": "",
+            "nav_title_size": 11,
+            "link_size": 13,
+            "nav_gap": 60,
+            "show_newsletter": true,
+            "newsletter_title": "Newsletter",
+            "newsletter_title_size": 12,
+            "newsletter_text": "Subscribe to receive updates, access to exclusive deals, and more.",
+            "newsletter_text_size": 13,
+            "newsletter_placeholder": "Enter your email address",
+            "newsletter_button": "Subscribe",
+            "newsletter_success": "Thank you for subscribing",
+            "social_instagram": "",
+            "social_facebook": "",
+            "social_twitter": "",
+            "social_pinterest": "",
+            "social_icon_size": 20,
+            "copyright_text": "© 2025 Your Store. All rights reserved.",
+            "copyright_size": 11,
+            "show_payment_icons": false,
+            "background_color": "#ffffff",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "border_color": "#e5e5e5",
+            "padding_top": 80,
+            "padding_bottom": 60,
+            "section_spacing": 50,
+            "container_width": 1400
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_bb6cbff_y7Rnny"
+      ],
+      "settings": {}
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -58,6 +114,7 @@
         "menu_qH6Bpd",
         "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2"
       ],
+      "disabled": true,
       "custom_css": [
         ".full-width-row {justify-content: space-between;}"
       ],
@@ -72,6 +129,7 @@
     }
   },
   "order": [
+    "17638192526461a72e",
     "footer"
   ]
 }
