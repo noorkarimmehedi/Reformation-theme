@@ -310,8 +310,8 @@
             "product_name_spacing": 1,
             "product_name_color": "#000000",
             "price_font": "system_ui_n4",
-            "price_size": 12,
-            "price_color": "#888888",
+            "price_size": 16,
+            "price_color": "#000000",
             "name_price_gap": 8,
             "text_alignment": "left"
           },
