@@ -46,7 +46,7 @@
         "header_shadow": "header--shadow-small",
         "menu": "main-menu-1",
         "transparent_header": false,
-        "show_language_switcher": true,
+        "show_language_switcher": false,
         "show_currency_switcher": false,
         "mobile_secondary_menu": "",
         "mobile_promo_image": "shopify://shop_images/animals-and-pet-supplies-products-2.jpg",
