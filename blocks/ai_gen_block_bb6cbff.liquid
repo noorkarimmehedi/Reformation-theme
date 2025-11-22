@@ -1,6 +1,8 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  {{ block.settings.logo_font | font_face: font_display: 'swap' }}
+
   .ai-luxury-footer-{{ ai_gen_id }} {
     background-color: {{ block.settings.background_color }};
     color: {{ block.settings.text_color }};
@@ -42,6 +44,8 @@
     font-weight: {{ block.settings.logo_text_weight }};
     letter-spacing: {{ block.settings.logo_text_spacing }}px;
     text-transform: {{ block.settings.logo_text_transform }};
+    font-family: {{ block.settings.logo_font.family }}, {{ block.settings.logo_font.fallback_families }};
+    font-style: {{ block.settings.logo_font.style }};
     margin-bottom: 20px;
     text-align: {{ block.settings.logo_alignment }};
   }
@@ -574,6 +578,12 @@
       "id": "logo_text",
       "label": "Logo text",
       "info": "Displays if no logo image is uploaded. Leave blank to use shop name."
+    },
+    {
+      "type": "font_picker",
+      "id": "logo_font",
+      "label": "Logo font",
+      "default": "helvetica_n4"
     },
     {
       "type": "range",
