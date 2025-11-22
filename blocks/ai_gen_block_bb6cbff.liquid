@@ -142,7 +142,7 @@
     letter-spacing: 0.5px;
     min-width: 0;
     height: 50px;
-    line-height: 50px;
+    line-height: normal;
     box-sizing: border-box;
   }
 
@@ -171,11 +171,11 @@
   }
 
   .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
-    padding: 0 30px;
+    padding: 0 25px;
     background-color: transparent;
     border: 1px solid {{ block.settings.border_color }};
     color: {{ block.settings.text_color }};
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
@@ -293,6 +293,13 @@
 
     .ai-luxury-footer__newsletter-input-{{ ai_gen_id }} {
       border-right: 1px solid {{ block.settings.border_color }};
+      border-bottom: none;
+      height: 48px;
+    }
+
+    .ai-luxury-footer__newsletter-button-{{ ai_gen_id }} {
+      height: 48px;
+      line-height: 48px;
     }
   }
 
