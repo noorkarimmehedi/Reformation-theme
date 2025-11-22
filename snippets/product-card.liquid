@@ -60,7 +60,7 @@ Supported variables:
     align-items: center !important;
     justify-content: flex-start !important;
     gap: 8px !important;
-    margin: 8px 0 !important;
+    margin: 4px 0 !important;
   }
 
   .product-card__price {
@@ -81,9 +81,10 @@ Supported variables:
   
   /* Ensure consistent spacing for product title */
   .product-card__title {
-    min-height: 40px !important;
-    display: block !important;
-    margin: 8px 0 !important;
+    min-height: 56px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    margin: 0 0 4px 0 !important;
   }
   
   .product-card__title a {
@@ -107,18 +108,20 @@ Supported variables:
     flex-grow: 1 !important;
     display: flex !important;
     flex-direction: column !important;
+    gap: 0 !important;
   }
 
   .product-card__vendor {
     font-size: 12px !important;
     color: #666 !important;
-    margin: 4px 0 !important;
+    margin: 0 0 4px 0 !important;
+    min-height: 18px !important;
   }
 
   /* Add to Cart Button Container - always at bottom */
   .product-card__add-to-cart {
     margin-top: auto !important;
-    padding-top: 12px !important;
+    padding-top: 8px !important;
     width: 100% !important;
   }
 
