@@ -67,12 +67,14 @@
   position: relative !important;
   width: 100% !important;
   min-width: 7.2em !important;
-  height: 2em !important;
+  height: 2.5em !important;
   transition: 0.5s !important;
   font-size: 13px !important;
   border-radius: 0.4em !important;
-  display: block !important;
-  text-align: left !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
   text-decoration: none !important;
 }
 
@@ -90,25 +92,24 @@
 
 .product-card--add-to-cart-button-inner {
   position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .product-card--add-to-cart-text {
-  position: absolute !important;
-  top: 0.4em !important;
-  left: 1.2em !important;
   margin: 0 !important;
   padding: 0 !important;
   transition: 0.5s !important;
   color: #bc2a8d !important;
   display: block !important;
+  position: relative !important;
 }
 
 .product-card--add-to-cart-button:hover .product-card--add-to-cart-text {
-  left: 0.6em !important;
   color: #fff !important;
   transform: none !important;
+  padding-right: 1.5em !important;
 }
 
 .product-card--add-to-cart-text-hover {
@@ -117,8 +118,9 @@
 
 .product-card--add-to-cart-icon {
   position: absolute !important;
-  top: 0.45em !important;
-  right: 0.5em !important;
+  right: -1.5em !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
   margin: 0 !important;
   padding: 0 !important;
   opacity: 0 !important;
@@ -130,6 +132,7 @@
 
 .product-card--add-to-cart-button:hover .product-card--add-to-cart-icon {
   opacity: 1 !important;
+  right: 0 !important;
 }
 
 /* Add consistent spacing above the button */
