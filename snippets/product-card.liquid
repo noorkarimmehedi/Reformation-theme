@@ -59,61 +59,77 @@
 .product-card--add-to-cart-button {
   margin-top: auto !important;
   cursor: pointer !important;
-  background: black !important;
-  background-color: black !important;
+  background-color: #fff !important;
+  background: #fff !important;
   background-image: none !important;
-  box-shadow: 0px 0px 0px 0 rgba(0,0,0,.70) !important;
-  padding: 12px 24px !important;
-  border-radius: 0px !important;
-  border: 0px !important;
-  color: white !important;
-  font-weight: 500 !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  overflow: hidden !important;
+  border: 1px solid #bc2a8d !important;
+  padding: 5px !important;
   position: relative !important;
+  width: 100% !important;
+  min-width: 7.2em !important;
+  height: 2em !important;
+  transition: 0.5s !important;
+  font-size: 17px !important;
+  border-radius: 0.4em !important;
   display: block !important;
+  text-align: left !important;
+  text-decoration: none !important;
 }
 
 .product-card--add-to-cart-button:focus {
-  cursor: pointer !important;
-  background: black !important;
-  background-color: black !important;
+  background-color: #fff !important;
+  background: #fff !important;
   background-image: none !important;
-  box-shadow: 0px 0px 0px 0 rgba(0,0,0,.70) !important;
-  padding: 12px 24px !important;
-  border-radius: 0px !important;
-  border: 0px !important;
-  color: white !important;
-  font-weight: 500 !important;
+  border: 1px solid #bc2a8d !important;
+}
+
+.product-card--add-to-cart-button:hover {
+  background-color: #bc2a8d !important;
+  background: #bc2a8d !important;
 }
 
 .product-card--add-to-cart-button-inner {
   position: relative !important;
-  overflow: hidden !important;
-  display: inline-block !important;
-  min-height: 1.5em !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .product-card--add-to-cart-text {
+  position: absolute !important;
+  top: 0.4em !important;
+  left: 1.2em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: 0.5s !important;
+  color: #bc2a8d !important;
   display: block !important;
-  transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1) !important;
 }
 
 .product-card--add-to-cart-button:hover .product-card--add-to-cart-text {
-  transform: translateY(-1.75em) !important;
+  left: 0.6em !important;
+  color: #fff !important;
+  transform: none !important;
 }
 
 .product-card--add-to-cart-text-hover {
-  position: absolute !important;
-  top: 1.75em !important;
-  left: 0 !important;
-  right: 0 !important;
-  transition: top 1.125s cubic-bezier(0.19, 1, 0.22, 1) !important;
+  display: none !important;
 }
 
-.product-card--add-to-cart-button:hover .product-card--add-to-cart-text-hover {
-  top: 0 !important;
+.product-card--add-to-cart-icon {
+  position: absolute !important;
+  top: 0.45em !important;
+  right: 0.5em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  transition: 0.5s !important;
+  height: 1em !important;
+  width: 1em !important;
+  fill: #fff !important;
+}
+
+.product-card--add-to-cart-button:hover .product-card--add-to-cart-icon {
+  opacity: 1 !important;
 }
 
 /* Add consistent spacing above the button */
@@ -198,13 +214,9 @@
 								{{- 'products.product.sold_out' | t -}}
 							{%- endif -%}
 						</span>
-						<span class="product-card--add-to-cart-text-hover">
-							{%- if product_card_product.selected_or_first_available_variant.available -%}
-								{{- 'products.product.add_to_cart' | t -}}
-							{%- else -%}
-								{{- 'products.product.sold_out' | t -}}
-							{%- endif -%}
-						</span>
+						<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
 					</div>
 				</button>
 			{% else %}
@@ -212,7 +224,9 @@
 					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
 					<div class="product-card--add-to-cart-button-inner">
 						<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
-						<span class="product-card--add-to-cart-text-hover">{{ 'products.product.choose_options' | t }}</span>
+						<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
 					</div>
 				</quick-view>
 			{% endif %}
@@ -244,7 +258,9 @@
 				<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
 				<div class="product-card--add-to-cart-button-inner">
 					<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
-					<span class="product-card--add-to-cart-text-hover">{{ 'products.product.choose_options' | t }}</span>
+					<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+					</svg>
 				</div>
 			</quick-view>
 		{%- endif -%}
