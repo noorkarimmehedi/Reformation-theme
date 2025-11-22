@@ -1,343 +1,287 @@
-{%- comment -%}
-----------------------------------------------------------------------------------------------------------------------
-PRODUCT CARD COMPONENT - Reformation Theme Compatible
-----------------------------------------------------------------------------------------------------------------------
-Supported variables:
-* product_card_product: the product to render (THIS IS THE KEY VARIABLE NAME FOR REFORMATION THEME)
-{%- endcomment -%}
+{%- if product_card_product and product_card_product != empty -%}
+{% liquid
+	assign products_hover_images = settings.products_hover_images
+	assign products_hover_images_count = settings.products_hover_images_count
+	assign product_aspect_ratio = settings.product_aspect_ratio
+	assign featured_media = product_card_product.featured_media
+	assign ratio = 1
+	assign sizes = '375x375,770x770'
 
-{%- liquid
-  assign product = product_card_product
+
+	if featured_media.media_type != 'image'
+		assign featured_media = featured_media.preview_image
+	endif
+	if product_aspect_ratio == 'adapt'
+		assign ratio = featured_media.aspect_ratio
+		assign sizes = '375x0,770x0'
+	elsif product_aspect_ratio == 'portrait'
+		assign ratio = 1 | divided_by: 1.25
+		assign sizes = '375x350,770x700'
+	elsif product_aspect_ratio == 'landscape'
+		assign ratio = 1 | divided_by: 0.75
+		assign sizes = '375x250,770x500'
+	endif
+	assign product_content_alignment = settings.product_content_alignment
+
+	assign is_purchasable = false
+	if product_card_product.available and product_card_product.variants.size == 1
+		assign is_purchasable = true
+	endif
 -%}
 
 <style>
-  .product-card__aside {
-    display: none !important;
-  }
+/* Truncate product title to two lines with ellipsis */
+.product-card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  min-height: 2.8em;
+  max-height: 2.8em;
+  margin-bottom: 8px;
+}
 
-  /* Product Card Border & Shadow Styling */
-  .product-card {
-    border: 1px solid #E0E0E0 !important;
-    border-radius: 4px !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0) !important;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    background: #fff !important;
-  }
-  
-  .product-card:hover {
-    border-color: #CCCCCC !important;
-  }
-  
-  .product-card__figure {
-    border-radius: 4px 4px 0 0 !important;
-    flex-shrink: 0 !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-  
-  .product-card__figure img {
-    border-radius: 4px 4px 0 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-  }
-  
-  .product-card__info {
-    padding: 12px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    flex-grow: 1 !important;
-  }
-  
-  /* Price alignment fix for consistent layout */
-  .product-card__price-list {
-    min-height: 24px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 8px !important;
-    margin: 0 !important;
-  }
+/* Ensure consistent card height and button alignment */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
-  .product-card__price {
-    font-weight: 600 !important;
-    font-size: 16px !important;
-  }
+.product-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
 
-  .product-card__price--on-sale {
-    color: #D50000 !important;
-  }
+/* Push the add to cart button to the bottom */
+.product-card--add-to-cart-button {
+  margin-top: auto !important;
+  cursor: pointer !important;
+  background-color: #fff !important;
+  background: #fff !important;
+  background-image: none !important;
+  border: 1px solid #000 !important;
+  padding: 5px !important;
+  position: relative !important;
+  width: 100% !important;
+  min-width: 7.2em !important;
+  height: 2.5em !important;
+  transition: 0.5s !important;
+  font-size: 13px !important;
+  border-radius: 0.2em !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
 
-  .product-card__price--compare {
-    color: #999999 !important;
-    font-size: 14px !important;
-    font-weight: 400 !important;
-    text-decoration: line-through !important;
-  }
-  
-  /* Ensure consistent spacing for product title */
-  .product-card__title {
-    min-height: 56px !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    margin: 0 !important;
-    line-height: 1.3 !important;
-  }
-  
-  .product-card__title a {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    line-height: 1.3 !important;
-    max-height: calc(1.3em * 2) !important;
-    color: #333 !important;
-    text-decoration: none !important;
-  }
+.product-card--add-to-cart-button:focus {
+  background-color: #fff !important;
+  background: #fff !important;
+  background-image: none !important;
+  border: 1px solid #000 !important;
+}
 
-  .product-card__title a:hover {
-    color: #D50000 !important;
-  }
+.product-card--add-to-cart-button:hover {
+  background-color: #000 !important;
+  background: #000 !important;
+}
 
-  /* Content wrapper to push button to bottom */
-  .product-card__content {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
-  }
+.product-card--add-to-cart-button-inner {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
-  .product-card__vendor {
-    font-size: 12px !important;
-    color: #666 !important;
-    margin: 0 0 4px 0 !important;
-    min-height: 18px !important;
-  }
+.product-card--add-to-cart-text {
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: 0.5s !important;
+  color: #000 !important;
+  display: block !important;
+  position: relative !important;
+}
 
-  /* Add to Cart Button Container - always at bottom */
-  .product-card__add-to-cart {
-    margin-top: auto !important;
-    padding-top: 8px !important;
-    width: 100% !important;
-  }
+.product-card--add-to-cart-button:hover .product-card--add-to-cart-text {
+  color: #fff !important;
+  transform: none !important;
+  padding-right: 1.5em !important;
+}
 
-  .product-card__add-to-cart form {
-    width: 100% !important;
-    margin: 0 !important;
-  }
+.product-card--add-to-cart-text-hover {
+  display: none !important;
+}
 
-  .product-card__add-to-cart-btn {
-    position: relative !important;
-    width: 100% !important;
-    padding: 10px 16px !important;
-    outline: none !important;
-    text-decoration: none !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    cursor: pointer !important;
-    text-transform: uppercase !important;
-    background-color: #D50000 !important;
-    border: 1px solid #E0E0E0 !important;
-    border-radius: 0 !important;
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
-    letter-spacing: 0.7px !important;
-    text-align: center !important;
-    font-family: inherit !important;
-    z-index: 0 !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0) !important;
-    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1) !important;
-  }
+.product-card--add-to-cart-icon {
+  position: absolute !important;
+  right: -1.5em !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  transition: 0.5s !important;
+  height: 1em !important;
+  width: 1em !important;
+  fill: #fff !important;
+}
 
-  .product-card__add-to-cart-btn:hover {
-    border-color: #CCCCCC !important;
-    animation: rotate624 0.7s ease-in-out both !important;
-  }
+.product-card--add-to-cart-button:hover .product-card--add-to-cart-icon {
+  opacity: 1 !important;
+  right: 0 !important;
+}
 
-  @keyframes rotate624 {
-    0% {
-      transform: rotate(0deg) translate3d(0, 0, 0);
-    }
-    25% {
-      transform: rotate(3deg) translate3d(0, 0, 0);
-    }
-    50% {
-      transform: rotate(-3deg) translate3d(0, 0, 0);
-    }
-    75% {
-      transform: rotate(1deg) translate3d(0, 0, 0);
-    }
-    100% {
-      transform: rotate(0deg) translate3d(0, 0, 0);
-    }
-  }
+/* Add consistent spacing above the button */
+.product-card-info > *:last-child {
+  margin-top: auto;
+  padding-top: 12px;
+}
 
-  @keyframes storm1261 {
-    0% {
-      transform: translate3d(0, 0, 0) translateZ(0);
-    }
-    25% {
-      transform: translate3d(4px, 0, 0) translateZ(0);
-    }
-    50% {
-      transform: translate3d(-3px, 0, 0) translateZ(0);
-    }
-    75% {
-      transform: translate3d(2px, 0, 0) translateZ(0);
-    }
-    100% {
-      transform: translate3d(0, 0, 0) translateZ(0);
-    }
-  }
+/* Fixed height for price section to ensure alignment */
+.product-card-info .price {
+  min-height: 2em;
+  margin-bottom: 8px;
+}
 
-  .product-card__add-to-cart-btn span {
-    color: #ffffff !important;
-    z-index: 20 !important;
-    animation: storm1261 0.7s ease-in-out both !important;
-    animation-delay: 0.06s !important;
-  }
+/* Ensure vendor has fixed space if shown */
+.product-card-vendor {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 1.4em;
+  max-height: 1.4em;
+  margin-bottom: 8px;
+}
 
-  .product-card__add-to-cart-btn:after {
-    background: #38ef7d !important;
-    content: "" !important;
-    height: 155px !important;
-    left: -75px !important;
-    opacity: 0.4 !important;
-    position: absolute !important;
-    top: -50px !important;
-    transform: rotate(35deg) !important;
-    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-    width: 50px !important;
-    z-index: -10 !important;
-  }
+/* Fixed height for rating section */
+.star-rating {
+  min-height: 1.5em;
+  margin-bottom: 8px;
+}
 
-  .product-card__add-to-cart-btn:hover:after {
-    left: 120% !important;
-    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-  }
-
-  .product-card__add-to-cart-btn:disabled {
-    background-color: #cccccc !important;
-    cursor: not-allowed !important;
-    opacity: 0.6 !important;
-  }
-
-  .product-card__add-to-cart-btn--unavailable {
-    background-color: #999999 !important;
-    cursor: not-allowed !important;
-  }
-  
-  /* Mobile specific adjustments */
-  @media (max-width: 699px) {
-    .product-card__price-list {
-      flex-wrap: wrap !important;
-      gap: 4px !important;
-    }
-    
-    .product-card__title {
-      min-height: 44px !important;
-      font-size: 14px !important;
-    }
-
-    .product-card__add-to-cart-btn {
-      padding: 8px 12px !important;
-      font-size: 13px !important;
-    }
-  }
+/* Swatch container fixed height */
+.product-card-info > .product-card-swatch {
+  min-height: 2em;
+  margin-bottom: 8px;
+}
 </style>
 
-<div class="product-card">
-  {%- comment -%}
-  --------------------------------------------------------------------------------------------------------------------
-  PRODUCT MEDIA
-  --------------------------------------------------------------------------------------------------------------------
-  {%- endcomment -%}
-
-  {%- if product.featured_media -%}
-    <div class="product-card__figure">
-      <a href="{{ product.url }}">
-        <img 
-          src="{{ product.featured_media | img_url: '600x' }}" 
-          alt="{{ product.featured_media.alt | escape }}"
-          loading="lazy"
-          width="600"
-          height="600"
-        >
-      </a>
-    </div>
-  {%- endif -%}
-
-  {%- comment -%}
-  --------------------------------------------------------------------------------------------------------------------
-  PRODUCT INFO
-  --------------------------------------------------------------------------------------------------------------------
-  {%- endcomment -%}
-
-  <div class="product-card__info">
-    <div class="product-card__content">
-      
-      {%- comment -%}PRODUCT VENDOR{%- endcomment -%}
-      {%- if product.vendor != blank -%}
-        <div class="product-card__vendor">
-          {{ product.vendor }}
-        </div>
+<product-card class="product-card text-{{ product_content_alignment }}">
+  <figure class="product-featured-image {% if products_hover_images and product_card_product.images.size > 1 and products_hover_images_count > 0 %}thb-hover{% endif %}">
+    {% render 'product-card-badge', product_card_product: product_card_product %}
+    <a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
+      {%- if products_hover_images and product_card_product.images.size > 1 -%}
+        {%- for i in (1..products_hover_images_count) -%}
+					{%- if product_card_product.images[i] -%}
+	          {%- render 'responsive-image', class: 'product-secondary-image', image: product_card_product.images[i], sizes: sizes -%}
+		      {%- endif -%}
+        {%- endfor %}
       {%- endif -%}
+			{%- if featured_media -%}
+      	{%- render 'responsive-image', class: 'product-primary-image', image: featured_media, sizes: sizes -%}
+			{%- else -%}
+				<div class="thb-placeholder">
+					{{ 'product-1' | placeholder_svg_tag }}
+				</div>
+			{%- endif -%}
 
-      {%- comment -%}PRODUCT TITLE{%- endcomment -%}
-      <div class="product-card__title">
-        <a href="{{ product.url }}">{{ product.title }}</a>
-      </div>
-
-      {%- comment -%}PRICE{%- endcomment -%}
-      <div class="product-card__price-list">
-        {%- if product.price_varies -%}
-          <span class="product-card__price">From {{ product.price_min | money }}</span>
-        {%- else -%}
-          {%- if product.compare_at_price > product.price -%}
-            <span class="product-card__price product-card__price--on-sale">{{ product.price | money }}</span>
-            <span class="product-card__price product-card__price--compare">{{ product.compare_at_price | money }}</span>
-          {%- else -%}
-            <span class="product-card__price">{{ product.price | money }}</span>
-          {%- endif -%}
-        {%- endif -%}
-      </div>
-    </div>
-
-    {%- comment -%}
-    --------------------------------------------------------------------------------------------------------------------
-    ADD TO CART BUTTON
-    --------------------------------------------------------------------------------------------------------------------
-    {%- endcomment -%}
-    
-    <div class="product-card__add-to-cart">
-      {%- if product.available -%}
-        {%- if product.variants.size == 1 -%}
-          {%- comment -%} Single variant - direct add to cart {%- endcomment -%}
-          <form action="/cart/add" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <button type="submit" name="add" class="product-card__add-to-cart-btn">
-              <span>Add to Cart</span>
-            </button>
-          </form>
-        {%- else -%}
-          {%- comment -%} Multiple variants - link to product page {%- endcomment -%}
-          <a href="{{ product.url }}" class="product-card__add-to-cart-btn">
-            <span>Select Options</span>
-          </a>
-        {%- endif -%}
-      {%- else -%}
-        <button type="button" class="product-card__add-to-cart-btn product-card__add-to-cart-btn--unavailable" disabled>
-          <span>Sold Out</span>
-        </button>
+			{%- if settings.enable_quick_view -%}
+			<quick-view class="product-card-quickview" href="#Product-Drawer" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+				<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
+				<span>{{ 'products.product.quick_view' | t }}</span>
+			</quick-view>
+			{%- endif -%}
+			{%- if products_hover_images and product_card_product.images.size > 1 and settings.products_hover_dots -%}
+				<ul class="product-secondary-images-nav">
+        {%- for i in (1..products_hover_images_count) -%}
+					{%- if product_card_product.images[i] -%}
+          <li></li>
+					{%- endif -%}
+        {%- endfor %}
+				</ul>
       {%- endif -%}
-    </div>
+    </a>
+  </figure>
+	<div class="product-card-info">
+		{%- if settings.show_products_vendor -%}
+		<div class="product-card-vendor"><a href="{{ product_card_product.vendor | url_for_vendor }}" title="{{ product_card_product.vendor | escape }}">{{ product_card_product.vendor }}</a></div>
+		{%- endif -%}
+  	<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_card_product.title }}</a>
+    {% render 'product-price', product: product_card_product %}
+		{% render 'product-card-swatch', product: product_card_product, sizes: sizes %}
+		{%- if settings.show_products_rating and product_card_product.metafields.reviews.rating.value != blank -%}
+		<div class="star-rating" style="--star-rating: {{ product_card_product.metafields.reviews.rating.value.rating }};"></div>
+		{%- endif -%}
+		{%- if settings.enable_quick_add -%}
+			{% if is_purchasable %}
+				<button class="product-card--add-to-cart-button product-card--add-to-cart-button-simple button outline" data-product-id="{{ product_card_product.selected_or_first_available_variant.id }}" tabindex="-1" {% if product_card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
+					<div class="product-card--add-to-cart-button-inner">
+						<span class="product-card--add-to-cart-text">
+							{%- if product_card_product.selected_or_first_available_variant.available -%}
+								{{- 'products.product.add_to_cart' | t -}}
+							{%- else -%}
+								{{- 'products.product.sold_out' | t -}}
+							{%- endif -%}
+						</span>
+						<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
+					</div>
+				</button>
+			{% else %}
+				<quick-view class="product-card--add-to-cart-button button outline" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
+					<div class="product-card--add-to-cart-button-inner">
+						<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+						<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
+					</div>
+				</quick-view>
+			{% endif %}
+		{%- endif -%}
   </div>
-</div>
+</product-card>
+{%- else -%}
+<product-card class="product-card">
+	<figure class="product-featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
+		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
+			<div class="thb-placeholder">
+				{{ 'product-1' | placeholder_svg_tag }}
+			</div>
+			<button class="product-card-quickview" href="#Product-Drawer" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+				<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
+				<span>{{ 'products.product.quick_view' | t }}</span>
+			</button>
+		</a>
+	</figure>
+	<div class="product-card-info">
+		<div class="product-card-vendor"><a href="#" title="{{ 'onboarding.product_vendor' | t }}">{{ 'onboarding.product_vendor' | t }}</a></div>
+		<a href="#" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ 'onboarding.product_title' | t }}</a>
+		{% render 'product-price', product: product_card_product %}
+		{%- if settings.show_products_rating and product_card_product.metafields.reviews.rating.value != blank -%}
+		<div class="star-rating" style="--star-rating: 5;"></div>
+		{%- endif -%}
+		{%- if settings.enable_quick_add -%}
+			<quick-view class="product-card--add-to-cart-button button outline" data-product-handle="" tabindex="-1" disabled>
+				<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
+				<div class="product-card--add-to-cart-button-inner">
+					<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+					<svg class="product-card--add-to-cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+						<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+					</svg>
+				</div>
+			</quick-view>
+		{%- endif -%}
+	</div>
+</product-card>
+{%- endif -%}
