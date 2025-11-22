@@ -18,6 +18,11 @@
           "type": "ai_gen_block_bb6cbff",
           "settings": {
             "logo_width": 150,
+            "logo_text": "",
+            "logo_text_size": 46,
+            "logo_text_weight": "400",
+            "logo_text_spacing": 2,
+            "logo_text_transform": "uppercase",
             "logo_alignment": "left",
             "tagline": "Timeless elegance, refined craftsmanship",
             "tagline_size": 16,
