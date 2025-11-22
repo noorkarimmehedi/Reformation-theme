@@ -230,6 +230,7 @@
         "template--20690466865451__46322c5c-3347-49a0-b4b9-a5f2ad634b2c-collection-1",
         "template--20690466865451__46322c5c-3347-49a0-b4b9-a5f2ad634b2c-collection-2"
       ],
+      "disabled": true,
       "custom_css": [
         ".h3 {display: none;}"
       ],
@@ -324,6 +325,7 @@
     },
     "featured_collection_QqVeNi": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "heading": "Featured Collection",
