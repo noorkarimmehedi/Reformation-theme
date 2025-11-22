@@ -2,7 +2,13 @@
 ----------------------------------------------------------------------------------------------------------------------
 PRODUCT CARD COMPONENT - Reformation Theme Compatible
 ----------------------------------------------------------------------------------------------------------------------
+Supported variables:
+* product_card_product: the product to render (THIS IS THE KEY VARIABLE NAME FOR REFORMATION THEME)
 {%- endcomment -%}
+
+{%- liquid
+  assign product = product_card_product
+-%}
 
 <style>
   .product-card__aside {
@@ -19,6 +25,7 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
     display: flex !important;
     flex-direction: column !important;
     height: 100% !important;
+    background: #fff !important;
   }
   
   .product-card:hover {
@@ -29,6 +36,7 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
     border-radius: 4px 4px 0 0 !important;
     flex-shrink: 0 !important;
     position: relative !important;
+    overflow: hidden !important;
   }
   
   .product-card__figure img {
@@ -46,7 +54,7 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
   }
   
   /* Price alignment fix for consistent layout */
-  .product-card__info .price-list {
+  .product-card__price-list {
     min-height: 24px !important;
     display: flex !important;
     align-items: center !important;
@@ -54,24 +62,21 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
     gap: 8px !important;
     margin: 8px 0 !important;
   }
-  
-  .product-card__info--center .price-list {
-    justify-content: center !important;
-  }
 
-  .price-list .price {
+  .product-card__price {
     font-weight: 600 !important;
     font-size: 16px !important;
   }
 
-  .price-list .price--on-sale {
+  .product-card__price--on-sale {
     color: #D50000 !important;
   }
 
-  .price-list .price--compare {
+  .product-card__price--compare {
     color: #999999 !important;
     font-size: 14px !important;
     font-weight: 400 !important;
+    text-decoration: line-through !important;
   }
   
   /* Ensure consistent spacing for product title */
@@ -89,8 +94,12 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
     text-overflow: ellipsis !important;
     line-height: 1.4 !important;
     max-height: calc(1.4em * 2) !important;
-    color: inherit !important;
+    color: #333 !important;
     text-decoration: none !important;
+  }
+
+  .product-card__title a:hover {
+    color: #D50000 !important;
   }
 
   /* Content wrapper to push button to bottom */
@@ -100,11 +109,22 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
     flex-direction: column !important;
   }
 
+  .product-card__vendor {
+    font-size: 12px !important;
+    color: #666 !important;
+    margin: 4px 0 !important;
+  }
+
   /* Add to Cart Button Container - always at bottom */
   .product-card__add-to-cart {
     margin-top: auto !important;
     padding-top: 12px !important;
     width: 100% !important;
+  }
+
+  .product-card__add-to-cart form {
+    width: 100% !important;
+    margin: 0 !important;
   }
 
   .product-card__add-to-cart-btn {
@@ -213,7 +233,7 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
   
   /* Mobile specific adjustments */
   @media (max-width: 699px) {
-    .product-card__info .price-list {
+    .product-card__price-list {
       flex-wrap: wrap !important;
       gap: 4px !important;
     }
@@ -244,6 +264,8 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
           src="{{ product.featured_media | img_url: '600x' }}" 
           alt="{{ product.featured_media.alt | escape }}"
           loading="lazy"
+          width="600"
+          height="600"
         >
       </a>
     </div>
@@ -258,28 +280,28 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
   <div class="product-card__info">
     <div class="product-card__content">
       
+      {%- comment -%}PRODUCT VENDOR{%- endcomment -%}
+      {%- if product.vendor != blank -%}
+        <div class="product-card__vendor">
+          {{ product.vendor }}
+        </div>
+      {%- endif -%}
+
       {%- comment -%}PRODUCT TITLE{%- endcomment -%}
       <div class="product-card__title">
         <a href="{{ product.url }}">{{ product.title }}</a>
       </div>
 
-      {%- comment -%}PRODUCT VENDOR{%- endcomment -%}
-      {%- if product.vendor != blank -%}
-        <div class="product-card__vendor" style="font-size: 12px; color: #666; margin: 4px 0;">
-          {{ product.vendor }}
-        </div>
-      {%- endif -%}
-
       {%- comment -%}PRICE{%- endcomment -%}
-      <div class="price-list">
+      <div class="product-card__price-list">
         {%- if product.price_varies -%}
-          <span class="price">From {{ product.price_min | money }}</span>
+          <span class="product-card__price">From {{ product.price_min | money }}</span>
         {%- else -%}
           {%- if product.compare_at_price > product.price -%}
-            <span class="price price--on-sale">{{ product.price | money }}</span>
-            <s class="price price--compare">{{ product.compare_at_price | money }}</s>
+            <span class="product-card__price product-card__price--on-sale">{{ product.price | money }}</span>
+            <span class="product-card__price product-card__price--compare">{{ product.compare_at_price | money }}</span>
           {%- else -%}
-            <span class="price">{{ product.price | money }}</span>
+            <span class="product-card__price">{{ product.price | money }}</span>
           {%- endif -%}
         {%- endif -%}
       </div>
@@ -297,7 +319,7 @@ PRODUCT CARD COMPONENT - Reformation Theme Compatible
           {%- comment -%} Single variant - direct add to cart {%- endcomment -%}
           <form action="/cart/add" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <button type="submit" class="product-card__add-to-cart-btn">
+            <button type="submit" name="add" class="product-card__add-to-cart-btn">
               <span>Add to Cart</span>
             </button>
           </form>
