@@ -359,6 +359,13 @@
 
 <script>
 function addToCart{{ ai_gen_id }}(variantId) {
+  const button = event.target;
+  const originalText = button.textContent;
+  
+  // Disable button and show loading state
+  button.disabled = true;
+  button.textContent = 'Adding...';
+  
   fetch('/cart/add.js', {
     method: 'POST',
     headers: {
@@ -369,18 +376,59 @@ function addToCart{{ ai_gen_id }}(variantId) {
       quantity: 1
     })
   })
-  .then(response => response.json())
-  .then(data => {
-    // Trigger cart drawer or redirect to cart
-    if (window.theme && window.theme.openCart) {
-      window.theme.openCart();
-    } else {
-      window.location.href = '/cart';
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+    return response.json();
+  })
+  .then(data => {
+    // Show success message
+    button.textContent = 'Added!';
+    
+    // Try different methods to open cart drawer based on theme
+    setTimeout(() => {
+      // Method 1: Check for common theme cart drawer functions
+      if (typeof Shopify !== 'undefined' && Shopify.theme && typeof Shopify.theme.openCart === 'function') {
+        Shopify.theme.openCart();
+      }
+      // Method 2: Check for Dawn theme
+      else if (document.querySelector('cart-drawer')) {
+        const cartDrawer = document.querySelector('cart-drawer');
+        if (cartDrawer && typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
+        }
+      }
+      // Method 3: Try to trigger a cart update event
+      else if (typeof window.dispatchEvent === 'function') {
+        window.dispatchEvent(new CustomEvent('cart:refresh'));
+        document.dispatchEvent(new CustomEvent('cart:updated'));
+      }
+      // Method 4: Look for cart icon and trigger click
+      else {
+        const cartIcon = document.querySelector('a[href="/cart"], .cart-link, #cart-icon-bubble');
+        if (cartIcon) {
+          cartIcon.click();
+        }
+      }
+      
+      // Reset button after 2 seconds
+      setTimeout(() => {
+        button.disabled = false;
+        button.textContent = originalText;
+      }, 2000);
+    }, 500);
   })
   .catch(error => {
     console.error('Error:', error);
-    alert('There was an error adding the item to your cart.');
+    button.textContent = 'Error';
+    alert('There was an error adding the item to your cart. Please try again.');
+    
+    // Reset button
+    setTimeout(() => {
+      button.disabled = false;
+      button.textContent = originalText;
+    }, 2000);
   });
 }
 </script>
