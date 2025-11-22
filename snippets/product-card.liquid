@@ -65,10 +65,26 @@ Supported variables
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
+    gap: 8px !important;
   }
   
   .product-card__info--center .price-list {
     justify-content: center !important;
+  }
+
+  .price-list .price {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+  }
+
+  .price-list .price--on-sale {
+    color: #D50000 !important;
+  }
+
+  .price-list .price--compare {
+    color: #999999 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
   }
   
   /* Ensure consistent spacing for product title */
@@ -322,7 +338,19 @@ Supported variables
           <span class="product-card__title"><a href="{{ product.url }}" class="bold" data-instant>{{ product.title }}</a></span>
         {%- endif -%}
 
-        {%- render 'price-list', product: product, text_alignment: text_alignment -%}
+        {%- comment -%}PRICE LIST - REPLACED TO FIX ERROR{%- endcomment -%}
+        <div class="price-list">
+          {%- if product.price_varies -%}
+            <span class="price">From {{ product.price_min | money }}</span>
+          {%- else -%}
+            {%- if product.compare_at_price > product.price -%}
+              <span class="price price--on-sale">{{ product.price | money }}</span>
+              <s class="price price--compare">{{ product.compare_at_price | money }}</s>
+            {%- else -%}
+              <span class="price">{{ product.price | money }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
       </div>
 
       {%- if show_rating and mobile_reduced or text_alignment == 'center' -%}
