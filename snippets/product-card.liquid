@@ -28,6 +28,53 @@
 		assign is_purchasable = true
 	endif
 -%}
+
+<style>
+/* Truncate product title to one line with ellipsis */
+.product-card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  max-height: 1.4em;
+}
+
+/* Ensure consistent card height and button alignment */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Push the add to cart button to the bottom */
+.product-card--add-to-cart-button {
+  margin-top: auto !important;
+}
+
+/* Add consistent spacing above the button */
+.product-card-info > *:last-child {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Limit vendor text to one line too for consistency */
+.product-card-vendor {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+
 <product-card class="product-card text-{{ product_content_alignment }}">
   <figure class="product-featured-image {% if products_hover_images and product_card_product.images.size > 1 and products_hover_images_count > 0 %}thb-hover{% endif %}">
     {% render 'product-card-badge', product_card_product: product_card_product %}
