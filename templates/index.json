@@ -305,7 +305,7 @@
             "card_shadow_blur": 8,
             "card_shadow_opacity": 0,
             "card_content_padding": 16,
-            "product_name_font": "system_ui_n4",
+            "product_name_font": "archivo_narrow_n4",
             "product_name_size": 12,
             "product_name_spacing": 1,
             "product_name_color": "#000000",
