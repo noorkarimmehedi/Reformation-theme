@@ -379,7 +379,7 @@
             "product_title_size_desktop": 14,
             "product_title_color": "#151515",
             "product_price_font": "system_ui_n4",
-            "product_price_size_mobile": 11,
+            "product_price_size_mobile": 13,
             "product_price_size_desktop": 13,
             "product_price_color": "#151515",
             "product_text_align": "center",
