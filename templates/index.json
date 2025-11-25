@@ -321,6 +321,7 @@
       "block_order": [
         "ai_gen_block_ac82f35_byVcX4"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1764060580a2745ace": {
@@ -408,7 +409,6 @@
       "block_order": [
         "ai_gen_block_bc5b4e9_EPUwgb"
       ],
-      "disabled": true,
       "settings": {}
     },
     "featured_collection_QqVeNi": {
