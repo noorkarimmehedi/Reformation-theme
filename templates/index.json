@@ -367,10 +367,10 @@
             "image_padding_bottom": 125,
             "glass_padding_mobile": 12,
             "glass_padding_desktop": 16,
-            "glass_bg_color": "rgba(255, 255, 255, 0.8)",
+            "glass_bg_color": "#ffffffcc",
             "glass_blur": 12,
             "glass_border_width": 1,
-            "glass_border_color": "rgba(255, 255, 255, 0.4)",
+            "glass_border_color": "#ffffff66",
             "glass_border_radius": 4,
             "glass_shadow_opacity": 0,
             "product_title_font": "system_ui_n4",
@@ -395,9 +395,9 @@
             "cart_button_padding_desktop": 10,
             "cart_button_border_radius": 4,
             "cart_button_border_width": 1,
-            "cart_button_bg_color": "rgba(255, 255, 255, 0.6)",
+            "cart_button_bg_color": "#ffffff99",
             "cart_button_text_color": "#151515",
-            "cart_button_border_color": "rgba(21, 21, 21, 0.2)",
+            "cart_button_border_color": "#15151533",
             "cart_button_hover_bg_color": "#151515",
             "cart_button_hover_text_color": "#ffffff",
             "cart_button_hover_border_color": "#151515"
@@ -408,6 +408,7 @@
       "block_order": [
         "ai_gen_block_bc5b4e9_EPUwgb"
       ],
+      "disabled": true,
       "settings": {}
     },
     "featured_collection_QqVeNi": {
