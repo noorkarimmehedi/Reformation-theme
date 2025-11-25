@@ -87,15 +87,8 @@
 
   .ai-product-card-{{ ai_gen_id }} {
     position: relative;
-    border-radius: {{ block.settings.card_border_radius }}px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 }});
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .ai-product-card-{{ ai_gen_id }}:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 | times: 1.5 }});
+    display: flex;
+    flex-direction: column;
   }
 
   .ai-product-image-wrapper-{{ ai_gen_id }} {
@@ -103,7 +96,14 @@
     width: 100%;
     padding-bottom: {{ block.settings.image_padding_bottom }}%;
     overflow: hidden;
-    background-color: #1a1a1a;
+    background-color: #f5f5f5;
+    margin-bottom: 12px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-product-image-wrapper-{{ ai_gen_id }} {
+      margin-bottom: 16px;
+    }
   }
 
   .ai-product-image-container-{{ ai_gen_id }} {
@@ -119,17 +119,12 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
-  }
-
-  .ai-product-card-{{ ai_gen_id }}:hover .ai-product-image-{{ ai_gen_id }} {
-    transform: scale(1.05);
   }
 
   .ai-product-image-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background-color: #2a2a2a;
+    background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,40 +136,20 @@
     opacity: 0.3;
   }
 
-  /* Glassmorphism Overlay Card */
-  .ai-glass-overlay-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: {{ block.settings.glass_bottom_offset_mobile }}px;
-    left: {{ block.settings.glass_side_offset_mobile }}px;
-    right: {{ block.settings.glass_side_offset_mobile }}px;
+  .ai-product-info-{{ ai_gen_id }} {
     padding: {{ block.settings.glass_padding_mobile }}px;
     background: {{ block.settings.glass_bg_color }};
     backdrop-filter: blur({{ block.settings.glass_blur }}px);
     -webkit-backdrop-filter: blur({{ block.settings.glass_blur }}px);
     border: {{ block.settings.glass_border_width }}px solid {{ block.settings.glass_border_color }};
     border-radius: {{ block.settings.glass_border_radius }}px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, {{ block.settings.glass_shadow_opacity | divided_by: 100.0 }}),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, {{ block.settings.glass_shadow_opacity }});
   }
 
   @media screen and (min-width: 750px) {
-    .ai-glass-overlay-{{ ai_gen_id }} {
-      bottom: {{ block.settings.glass_bottom_offset_desktop }}px;
-      left: {{ block.settings.glass_side_offset_desktop }}px;
-      right: {{ block.settings.glass_side_offset_desktop }}px;
+    .ai-product-info-{{ ai_gen_id }} {
       padding: {{ block.settings.glass_padding_desktop }}px;
-      gap: 16px;
     }
-  }
-
-  /* Product Info - Left Side */
-  .ai-product-info-{{ ai_gen_id }} {
-    flex: 1;
-    min-width: 0;
   }
 
   .ai-product-title-{{ ai_gen_id }} {
@@ -182,32 +157,32 @@
     font-weight: {{ block.settings.product_title_font.weight }};
     font-size: {{ block.settings.product_title_size_mobile }}px;
     color: {{ block.settings.product_title_color }};
-    margin: 0 0 4px 0;
+    margin: 0 0 6px 0;
     line-height: 1.3;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-align: {{ block.settings.product_text_align }};
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    min-height: {{ block.settings.product_title_size_mobile | times: 2.6 }}px;
   }
 
   @media screen and (min-width: 750px) {
     .ai-product-title-{{ ai_gen_id }} {
       font-size: {{ block.settings.product_title_size_desktop }}px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      min-height: {{ block.settings.product_title_size_desktop | times: 2.6 }}px;
     }
   }
 
   .ai-product-title-link-{{ ai_gen_id }} {
     color: inherit;
     text-decoration: none;
-    transition: opacity 0.2s ease;
   }
 
   .ai-product-title-link-{{ ai_gen_id }}:hover {
-    opacity: 0.8;
+    opacity: 0.7;
   }
 
   .ai-product-price-{{ ai_gen_id }} {
@@ -215,171 +190,57 @@
     font-weight: {{ block.settings.product_price_font.weight }};
     font-size: {{ block.settings.product_price_size_mobile }}px;
     color: {{ block.settings.product_price_color }};
-    margin: 0;
+    margin-bottom: 10px;
+    text-align: {{ block.settings.product_text_align }};
   }
 
   @media screen and (min-width: 750px) {
     .ai-product-price-{{ ai_gen_id }} {
       font-size: {{ block.settings.product_price_size_desktop }}px;
+      margin-bottom: 12px;
     }
   }
 
   .ai-product-price-compare-{{ ai_gen_id }} {
     text-decoration: line-through;
-    opacity: 0.5;
-    margin-left: 8px;
-    font-size: 0.85em;
+    opacity: 0.6;
+    margin-left: 6px;
+    font-size: 0.9em;
   }
 
-  /* Circular Add to Cart Button - Right Side */
   .ai-add-to-cart-{{ ai_gen_id }} {
-    flex-shrink: 0;
-    width: {{ block.settings.cart_button_size_mobile }}px;
-    height: {{ block.settings.cart_button_size_mobile }}px;
-    border-radius: 50%;
-    background: {{ block.settings.cart_button_bg_color }};
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    font-family: {{ block.settings.cart_button_font.family }}, {{ block.settings.cart_button_font.fallback_families }};
+    font-weight: {{ block.settings.cart_button_font.weight }};
+    width: 100%;
+    padding: {{ block.settings.cart_button_padding_mobile }}px;
+    background-color: {{ block.settings.cart_button_bg_color }};
+    color: {{ block.settings.cart_button_text_color }};
     border: {{ block.settings.cart_button_border_width }}px solid {{ block.settings.cart_button_border_color }};
+    border-radius: {{ block.settings.cart_button_border_radius }}px;
+    font-size: {{ block.settings.cart_button_size_mobile }}px;
+    letter-spacing: {{ block.settings.cart_button_letter_spacing }}px;
+    text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 20px rgba(255, 255, 255, {{ block.settings.cart_button_glow_opacity | divided_by: 100.0 }});
+    text-align: center;
   }
 
   @media screen and (min-width: 750px) {
     .ai-add-to-cart-{{ ai_gen_id }} {
-      width: {{ block.settings.cart_button_size_desktop }}px;
-      height: {{ block.settings.cart_button_size_desktop }}px;
+      padding: {{ block.settings.cart_button_padding_desktop }}px;
+      font-size: {{ block.settings.cart_button_size_desktop }}px;
     }
   }
 
   .ai-add-to-cart-{{ ai_gen_id }}:hover {
-    background: {{ block.settings.cart_button_hover_bg_color }};
+    background-color: {{ block.settings.cart_button_hover_bg_color }};
+    color: {{ block.settings.cart_button_hover_text_color }};
     border-color: {{ block.settings.cart_button_hover_border_color }};
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                0 0 30px rgba(255, 255, 255, {{ block.settings.cart_button_glow_opacity | divided_by: 100.0 | times: 1.5 }});
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}:active {
-    transform: scale(0.95);
   }
 
   .ai-add-to-cart-{{ ai_gen_id }}:disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
-    transform: none;
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}:disabled:hover {
-    transform: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Plus Icon */
-  .ai-plus-icon-{{ ai_gen_id }} {
-    width: {{ block.settings.plus_icon_size_mobile }}px;
-    height: {{ block.settings.plus_icon_size_mobile }}px;
-    position: relative;
-  }
-
-  @media screen and (min-width: 750px) {
-    .ai-plus-icon-{{ ai_gen_id }} {
-      width: {{ block.settings.plus_icon_size_desktop }}px;
-      height: {{ block.settings.plus_icon_size_desktop }}px;
-    }
-  }
-
-  .ai-plus-icon-{{ ai_gen_id }}::before,
-  .ai-plus-icon-{{ ai_gen_id }}::after {
-    content: '';
-    position: absolute;
-    background-color: {{ block.settings.plus_icon_color }};
-    border-radius: 2px;
-    transition: background-color 0.3s ease;
-  }
-
-  .ai-plus-icon-{{ ai_gen_id }}::before {
-    width: 100%;
-    height: 2px;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
-
-  .ai-plus-icon-{{ ai_gen_id }}::after {
-    width: 2px;
-    height: 100%;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}:hover .ai-plus-icon-{{ ai_gen_id }}::before,
-  .ai-add-to-cart-{{ ai_gen_id }}:hover .ai-plus-icon-{{ ai_gen_id }}::after {
-    background-color: {{ block.settings.plus_icon_hover_color }};
-  }
-
-  /* Check Icon for Added State */
-  .ai-check-icon-{{ ai_gen_id }} {
-    display: none;
-    width: {{ block.settings.plus_icon_size_mobile }}px;
-    height: {{ block.settings.plus_icon_size_mobile }}px;
-    color: {{ block.settings.plus_icon_color }};
-  }
-
-  @media screen and (min-width: 750px) {
-    .ai-check-icon-{{ ai_gen_id }} {
-      width: {{ block.settings.plus_icon_size_desktop }}px;
-      height: {{ block.settings.plus_icon_size_desktop }}px;
-    }
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}.added .ai-plus-icon-{{ ai_gen_id }} {
-    display: none;
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}.added .ai-check-icon-{{ ai_gen_id }} {
-    display: block;
-  }
-
-  /* Loading Spinner */
-  .ai-spinner-{{ ai_gen_id }} {
-    display: none;
-    width: {{ block.settings.plus_icon_size_mobile }}px;
-    height: {{ block.settings.plus_icon_size_mobile }}px;
-    border: 2px solid {{ block.settings.plus_icon_color }};
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin-{{ ai_gen_id }} 0.8s linear infinite;
-  }
-
-  @media screen and (min-width: 750px) {
-    .ai-spinner-{{ ai_gen_id }} {
-      width: {{ block.settings.plus_icon_size_desktop }}px;
-      height: {{ block.settings.plus_icon_size_desktop }}px;
-    }
-  }
-
-  @keyframes spin-{{ ai_gen_id }} {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}.loading .ai-plus-icon-{{ ai_gen_id }} {
-    display: none;
-  }
-
-  .ai-add-to-cart-{{ ai_gen_id }}.loading .ai-spinner-{{ ai_gen_id }} {
-    display: block;
   }
 
   .ai-empty-state-{{ ai_gen_id }} {
@@ -405,7 +266,7 @@
       {% for product in block.settings.collection.products limit: block.settings.products_limit %}
         <div class="ai-product-card-{{ ai_gen_id }}">
           <div class="ai-product-image-wrapper-{{ ai_gen_id }}">
-            <a href="{{ product.url }}" class="ai-product-image-container-{{ ai_gen_id }}">
+            <div class="ai-product-image-container-{{ ai_gen_id }}">
               {% if product.featured_image %}
                 <img
                   src="{{ product.featured_image | image_url: width: 800 }}"
@@ -420,43 +281,39 @@
                   {{ 'product-1' | placeholder_svg_tag }}
                 </div>
               {% endif %}
-            </a>
+            </div>
+          </div>
 
-            <!-- Glassmorphism Overlay -->
-            <div class="ai-glass-overlay-{{ ai_gen_id }}">
-              <div class="ai-product-info-{{ ai_gen_id }}">
-                <h3 class="ai-product-title-{{ ai_gen_id }}">
-                  <a href="{{ product.url }}" class="ai-product-title-link-{{ ai_gen_id }}">
-                    {{ product.title }}
-                  </a>
-                </h3>
+          <div class="ai-product-info-{{ ai_gen_id }}">
+            <h3 class="ai-product-title-{{ ai_gen_id }}">
+              <a href="{{ product.url }}" class="ai-product-title-link-{{ ai_gen_id }}">
+                {{ product.title }}
+              </a>
+            </h3>
 
-                <div class="ai-product-price-{{ ai_gen_id }}">
-                  {{ product.price | money }}
-                  {% if product.compare_at_price > product.price %}
-                    <span class="ai-product-price-compare-{{ ai_gen_id }}">
-                      {{ product.compare_at_price | money }}
-                    </span>
-                  {% endif %}
-                </div>
-              </div>
-
-              {% if block.settings.show_add_to_cart %}
-                <button
-                  class="ai-add-to-cart-{{ ai_gen_id }}"
-                  data-product-id="{{ product.id }}"
-                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                  {% unless product.available %}disabled{% endunless %}
-                  aria-label="{% if product.available %}Add {{ product.title }} to cart{% else %}{{ product.title }} is sold out{% endif %}"
-                >
-                  <span class="ai-plus-icon-{{ ai_gen_id }}"></span>
-                  <span class="ai-spinner-{{ ai_gen_id }}"></span>
-                  <svg class="ai-check-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </button>
+            <div class="ai-product-price-{{ ai_gen_id }}">
+              {{ product.price | money }}
+              {% if product.compare_at_price > product.price %}
+                <span class="ai-product-price-compare-{{ ai_gen_id }}">
+                  {{ product.compare_at_price | money }}
+                </span>
               {% endif %}
             </div>
+
+            {% if block.settings.show_add_to_cart %}
+              <button
+                class="ai-add-to-cart-{{ ai_gen_id }}"
+                data-product-id="{{ product.id }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                {% unless product.available %}disabled{% endunless %}
+              >
+                {% if product.available %}
+                  {{ block.settings.cart_button_text }}
+                {% else %}
+                  {{ block.settings.sold_out_text }}
+                {% endif %}
+              </button>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
@@ -488,16 +345,12 @@
         }
 
         async handleAddToCart(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          
-          const button = event.currentTarget;
+          const button = event.target;
           const variantId = button.dataset.variantId;
+          const originalText = button.textContent;
 
-          if (button.disabled || button.classList.contains('loading')) return;
-
-          button.classList.add('loading');
-          button.classList.remove('added');
+          button.disabled = true;
+          button.textContent = '{{ block.settings.adding_text }}';
 
           try {
             const response = await fetch('/cart/add.js', {
@@ -512,11 +365,11 @@
             });
 
             if (response.ok) {
-              button.classList.remove('loading');
-              button.classList.add('added');
+              button.textContent = '{{ block.settings.added_text }}';
               
               setTimeout(() => {
-                button.classList.remove('added');
+                button.textContent = originalText;
+                button.disabled = false;
               }, 2000);
 
               document.dispatchEvent(new CustomEvent('cart:refresh'));
@@ -528,7 +381,8 @@
               throw new Error('Failed to add to cart');
             }
           } catch (error) {
-            button.classList.remove('loading');
+            button.textContent = originalText;
+            button.disabled = false;
             console.error('Error adding to cart:', error);
           }
         }
@@ -591,7 +445,7 @@
       "id": "title_letter_spacing",
       "min": 0,
       "max": 5,
-      "step": 1,
+      "step": 0.5,
       "unit": "px",
       "label": "Title letter spacing",
       "default": 2
@@ -616,7 +470,8 @@
       "step": 50,
       "unit": "px",
       "label": "Maximum content width",
-      "default": 1600
+      "default": 1600,
+      "info": "Maximum width of the content area"
     },
     {
       "type": "range",
@@ -676,7 +531,8 @@
       "step": 5,
       "unit": "px",
       "label": "Horizontal padding (desktop)",
-      "default": 20
+      "default": 20,
+      "info": "Left and right padding on desktop"
     },
     {
       "type": "header",
@@ -714,10 +570,10 @@
       "id": "button_letter_spacing",
       "min": 0,
       "max": 3,
-      "step": 1,
+      "step": 0.5,
       "unit": "px",
       "label": "Button letter spacing",
-      "default": 2
+      "default": 1.5
     },
     {
       "type": "range",
@@ -854,87 +710,28 @@
     },
     {
       "type": "range",
-      "id": "card_border_radius",
-      "min": 0,
-      "max": 30,
-      "step": 2,
-      "unit": "px",
-      "label": "Card border radius",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "card_shadow_opacity",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "label": "Card shadow opacity (%)",
-      "default": 15
-    },
-    {
-      "type": "range",
       "id": "image_padding_bottom",
-      "min": 80,
+      "min": 50,
       "max": 150,
       "step": 5,
       "unit": "%",
       "label": "Image height",
       "default": 125,
-      "info": "Controls the aspect ratio"
+      "info": "Controls the aspect ratio. 100% = square, 125% = portrait, 75% = landscape"
     },
     {
       "type": "header",
-      "content": "Glassmorphism overlay"
-    },
-    {
-      "type": "range",
-      "id": "glass_bottom_offset_mobile",
-      "min": 8,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Bottom offset (mobile)",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "glass_bottom_offset_desktop",
-      "min": 10,
-      "max": 30,
-      "step": 2,
-      "unit": "px",
-      "label": "Bottom offset (desktop)",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "glass_side_offset_mobile",
-      "min": 8,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Side offset (mobile)",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "glass_side_offset_desktop",
-      "min": 10,
-      "max": 30,
-      "step": 2,
-      "unit": "px",
-      "label": "Side offset (desktop)",
-      "default": 16
+      "content": "Glassmorphism card"
     },
     {
       "type": "range",
       "id": "glass_padding_mobile",
-      "min": 10,
+      "min": 8,
       "max": 24,
       "step": 2,
       "unit": "px",
       "label": "Padding (mobile)",
-      "default": 14
+      "default": 12
     },
     {
       "type": "range",
@@ -944,29 +741,29 @@
       "step": 2,
       "unit": "px",
       "label": "Padding (desktop)",
-      "default": 18
+      "default": 16
     },
     {
       "type": "color",
       "id": "glass_bg_color",
       "label": "Background color",
-      "default": "rgba(0, 0, 0, 0.5)"
+      "default": "rgba(255, 255, 255, 0.8)"
     },
     {
       "type": "range",
       "id": "glass_blur",
-      "min": 5,
+      "min": 0,
       "max": 30,
-      "step": 1,
+      "step": 2,
       "unit": "px",
       "label": "Blur amount",
-      "default": 16
+      "default": 12
     },
     {
       "type": "range",
       "id": "glass_border_width",
       "min": 0,
-      "max": 2,
+      "max": 3,
       "step": 1,
       "unit": "px",
       "label": "Border width",
@@ -976,26 +773,26 @@
       "type": "color",
       "id": "glass_border_color",
       "label": "Border color",
-      "default": "rgba(255, 255, 255, 0.15)"
+      "default": "rgba(255, 255, 255, 0.4)"
     },
     {
       "type": "range",
       "id": "glass_border_radius",
-      "min": 8,
-      "max": 30,
+      "min": 0,
+      "max": 20,
       "step": 2,
       "unit": "px",
       "label": "Border radius",
-      "default": 14
+      "default": 8
     },
     {
       "type": "range",
       "id": "glass_shadow_opacity",
       "min": 0,
-      "max": 50,
-      "step": 5,
-      "label": "Shadow opacity (%)",
-      "default": 25
+      "max": 0.3,
+      "step": 0.1,
+      "label": "Shadow opacity",
+      "default": 0.1
     },
     {
       "type": "header",
@@ -1010,28 +807,28 @@
     {
       "type": "range",
       "id": "product_title_size_mobile",
-      "min": 9,
-      "max": 16,
+      "min": 10,
+      "max": 18,
       "step": 1,
       "unit": "px",
       "label": "Size (mobile)",
-      "default": 11
+      "default": 12
     },
     {
       "type": "range",
       "id": "product_title_size_desktop",
-      "min": 11,
-      "max": 20,
+      "min": 12,
+      "max": 22,
       "step": 1,
       "unit": "px",
       "label": "Size (desktop)",
-      "default": 13
+      "default": 14
     },
     {
       "type": "color",
       "id": "product_title_color",
       "label": "Color",
-      "default": "#ffffff"
+      "default": "#151515"
     },
     {
       "type": "header",
@@ -1046,28 +843,39 @@
     {
       "type": "range",
       "id": "product_price_size_mobile",
-      "min": 12,
-      "max": 20,
+      "min": 10,
+      "max": 16,
       "step": 1,
       "unit": "px",
       "label": "Size (mobile)",
-      "default": 14
+      "default": 11
     },
     {
       "type": "range",
       "id": "product_price_size_desktop",
-      "min": 14,
-      "max": 24,
+      "min": 11,
+      "max": 18,
       "step": 1,
       "unit": "px",
       "label": "Size (desktop)",
-      "default": 16
+      "default": 13
     },
     {
       "type": "color",
       "id": "product_price_color",
       "label": "Color",
-      "default": "#ffffff"
+      "default": "#151515"
+    },
+    {
+      "type": "select",
+      "id": "product_text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
@@ -1080,99 +888,140 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "cart_button_text",
+      "label": "Button text",
+      "default": "ADD TO CART"
+    },
+    {
+      "type": "text",
+      "id": "adding_text",
+      "label": "Adding text",
+      "default": "ADDING..."
+    },
+    {
+      "type": "text",
+      "id": "added_text",
+      "label": "Added text",
+      "default": "ADDED!"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold out text",
+      "default": "SOLD OUT"
+    },
+    {
+      "type": "font_picker",
+      "id": "cart_button_font",
+      "label": "Font",
+      "default": "sans-serif"
+    },
+    {
       "type": "range",
       "id": "cart_button_size_mobile",
-      "min": 36,
-      "max": 56,
-      "step": 2,
+      "min": 8,
+      "max": 14,
+      "step": 1,
       "unit": "px",
-      "label": "Button size (mobile)",
-      "default": 44
+      "label": "Size (mobile)",
+      "default": 9
     },
     {
       "type": "range",
       "id": "cart_button_size_desktop",
-      "min": 40,
-      "max": 64,
-      "step": 2,
+      "min": 9,
+      "max": 16,
+      "step": 1,
       "unit": "px",
-      "label": "Button size (desktop)",
-      "default": 50
+      "label": "Size (desktop)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "cart_button_letter_spacing",
+      "min": 0,
+      "max": 2,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "cart_button_padding_mobile",
+      "min": 6,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding (mobile)",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "cart_button_padding_desktop",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding (desktop)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "cart_button_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "cart_button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
     },
     {
       "type": "color",
       "id": "cart_button_bg_color",
       "label": "Background color",
-      "default": "rgba(255, 255, 255, 0.15)"
+      "default": "rgba(255, 255, 255, 0.6)"
     },
     {
       "type": "color",
-      "id": "cart_button_hover_bg_color",
-      "label": "Hover background",
-      "default": "rgba(255, 255, 255, 0.3)"
-    },
-    {
-      "type": "range",
-      "id": "cart_button_border_width",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "unit": "px",
-      "label": "Border width",
-      "default": 2
+      "id": "cart_button_text_color",
+      "label": "Text color",
+      "default": "#151515"
     },
     {
       "type": "color",
       "id": "cart_button_border_color",
       "label": "Border color",
-      "default": "rgba(255, 255, 255, 0.6)"
+      "default": "rgba(21, 21, 21, 0.2)"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "cart_button_hover_border_color",
       "label": "Hover border color",
-      "default": "rgba(255, 255, 255, 0.9)"
-    },
-    {
-      "type": "range",
-      "id": "cart_button_glow_opacity",
-      "min": 0,
-      "max": 40,
-      "step": 5,
-      "label": "Glow intensity (%)",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "plus_icon_size_mobile",
-      "min": 14,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Plus icon size (mobile)",
-      "default": 18
-    },
-    {
-      "type": "range",
-      "id": "plus_icon_size_desktop",
-      "min": 16,
-      "max": 28,
-      "step": 2,
-      "unit": "px",
-      "label": "Plus icon size (desktop)",
-      "default": 20
-    },
-    {
-      "type": "color",
-      "id": "plus_icon_color",
-      "label": "Plus icon color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "plus_icon_hover_color",
-      "label": "Plus icon hover color",
-      "default": "#ffffff"
+      "default": "#151515"
     }
   ],
   "presets": [
