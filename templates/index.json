@@ -480,34 +480,34 @@
     "testimonials_rNnwqF": {
       "type": "testimonials",
       "blocks": {
-        "quote_wimMLp": {
-          "type": "quote",
-          "settings": {
-            "stars": "",
-            "text": "Add your customer or client quote here to showcase them.",
-            "author": "Testimonial author"
-          }
-        },
         "quote_n84fMw": {
           "type": "quote",
           "settings": {
             "stars": "",
-            "text": "Add your customer or client quote here to showcase them.",
-            "author": "Testimonial author"
+            "text": "\"You can feel the difference the moment you unbox it. Premium materials, great fit, and my pet loves it. Highly recommend!\"",
+            "author": "Emily W."
+          }
+        },
+        "quote_wimMLp": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "\"I’m obsessed! The collar looks luxurious and my cat actually enjoys wearing it. Beautiful craftsmanship and fast delivery.\"",
+            "author": "Muhammad K."
           }
         },
         "quote_Tdm7wK": {
           "type": "quote",
           "settings": {
             "stars": "",
-            "text": "Add your customer or client quote here to showcase them.",
-            "author": "Testimonial author"
+            "text": "\"My pup gets compliments every time we go out! The leash looks premium and has held up beautifully. Worth every penny.\"",
+            "author": "Olivia M."
           }
         }
       },
       "block_order": [
-        "quote_wimMLp",
         "quote_n84fMw",
+        "quote_wimMLp",
         "quote_Tdm7wK"
       ],
       "name": "Testimonials",
