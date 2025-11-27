@@ -128,6 +128,45 @@
         "enable_video_looping": false
       }
     },
+    "17642333336ccda4e7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d341c47_6aPGTp": {
+          "type": "ai_gen_block_d341c47",
+          "settings": {
+            "left_column_width": 30,
+            "border_color": "#000000",
+            "border_width": 2,
+            "border_radius": 0,
+            "outer_background_color": "#ffffff",
+            "inner_background_color": "#ffffff",
+            "label_background_color": "#ffffff",
+            "label_text_color": "#000000",
+            "content_background_color": "#ffffff",
+            "content_text_color": "#363636",
+            "label_font_size": 14,
+            "content_font_size": 14,
+            "show_description": true,
+            "description_label": "Description",
+            "description_content": "<p>Premium quality materials with exceptional craftsmanship. Designed for comfort and durability.</p>",
+            "show_details": true,
+            "details_label": "Details",
+            "details_content": "<ul><li>100% premium cotton</li><li>Reinforced stitching</li><li>Available in multiple sizes</li></ul>",
+            "show_wash_care": true,
+            "wash_care_label": "Wash Care",
+            "wash_care_content": "<p>Machine wash cold. Tumble dry low. Do not bleach. Iron on low heat if needed.</p>",
+            "show_shipping": true,
+            "shipping_label": "Shipping",
+            "shipping_content": "<p>Free shipping on orders over $50. Standard delivery 3-5 business days. Express shipping available.</p>"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d341c47_6aPGTp"
+      ],
+      "settings": {}
+    },
     "16623877721f33fb14": {
       "type": "spacer",
       "disabled": true,
@@ -187,6 +226,7 @@
   "order": [
     "breadcrumbs",
     "main-product",
+    "17642333336ccda4e7",
     "16623877721f33fb14",
     "16625458859c68803a",
     "1662552569cce2536d",
