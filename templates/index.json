@@ -562,7 +562,7 @@
         "button_9hn7Wg"
       ],
       "settings": {
-        "section_width": "grid",
+        "section_width": "full-width-row-full",
         "image_parallax": false,
         "desktop_height": "desktop-height-650",
         "mobile_height": "mobile-height-500",
