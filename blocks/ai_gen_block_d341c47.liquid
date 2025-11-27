@@ -1,7 +1,7 @@
-{% doc %}
+{% comment %}
   @prompt
     This layout uses a clean, two-column table style design. Left side shows section titles like Description, Details, Wash Care, and Shipping. Right side contains clear, structured content. Minimal borders, uppercase headings, consistent spacing, and readable typography enhance clarity, professionalism, and easy scanning for users. the colors should be customizable , in mobile version it should be in This layout uses a clean, two-column table style design, i don't need any divider between Row and also  , the section must have a black border around the section with customizable border radius. also all text content should be in the section and border, in mobile version it should be  clean, two-column table style design., on mobile version the border's left and right side is clasing with the screen i want a little bit space on both left and right side, out the border area color also should be customizable 
-{% enddoc %}
+{% endcomment %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -33,8 +33,10 @@
 
   .ai-product-info-table__label-{{ ai_gen_id }} {
     color: {{ block.settings.label_color }};
+    font-family: {{ block.settings.label_font.family }}, {{ block.settings.label_font.fallback_families }};
     font-size: {{ block.settings.label_font_size }}px;
     font-weight: {{ block.settings.label_font_weight }};
+    font-style: {{ block.settings.label_font.style }};
     text-transform: {{ block.settings.label_text_transform }};
     letter-spacing: {{ block.settings.label_letter_spacing }}px;
   }
@@ -303,6 +305,12 @@
     {
       "type": "header",
       "content": "Label style"
+    },
+    {
+      "type": "font_picker",
+      "id": "label_font",
+      "label": "Font",
+      "default": "helvetica_n4"
     },
     {
       "type": "range",
