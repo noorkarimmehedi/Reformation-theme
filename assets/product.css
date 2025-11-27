@@ -1392,3 +1392,20 @@ div.shopify-payment-button button.shopify-payment-button__button {
 .shopify-payment-button {
   margin-top: 12px !important;
 }
+
+/* Add this CSS to hide the "More payment options" button */
+
+/* Hide the more options button */
+.shopify-payment-button__more-options {
+  display: none !important;
+}
+
+/* Optional: Also hide if there's a button element */
+button.shopify-payment-button__more-options {
+  display: none !important;
+}
+
+/* Clean up any extra spacing left behind */
+.shopify-payment-button {
+  margin-bottom: 0 !important;
+}
