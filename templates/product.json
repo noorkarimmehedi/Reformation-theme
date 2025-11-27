@@ -151,8 +151,28 @@
         "border_separator_full": true
       }
     },
+    "featured_collection_epJ3nA": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "heading": "Featured Collection",
+        "heading_left": false,
+        "description": "<p>Describe your featured collection here</p>",
+        "full_width": true,
+        "collection": "all-products",
+        "display_type": "grid",
+        "product_limit": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": false,
+        "show_progress_bar": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
         "heading": "YOU MAY ALSO LIKE",
         "heading_left": true,
@@ -170,6 +190,7 @@
     "16623877721f33fb14",
     "16625458859c68803a",
     "1662552569cce2536d",
+    "featured_collection_epJ3nA",
     "product-recommendations"
   ]
 }
