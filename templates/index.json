@@ -594,20 +594,9 @@
         "image_NmtqBX": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/vecteezy_white-cat-peeking-through-a-hole-in-the-wall-looking_24677454.jpg",
             "subheading": "",
-            "title": "Ethan",
-            "text": "",
-            "link_label": "",
-            "link": "",
-            "use_text_button": true,
-            "block_link": ""
-          }
-        },
-        "image_8Q6AaV": {
-          "type": "image",
-          "settings": {
-            "subheading": "",
-            "title": "Mason",
+            "title": "CAT Accessories",
             "text": "",
             "link_label": "",
             "link": "",
@@ -619,7 +608,19 @@
           "type": "image",
           "settings": {
             "subheading": "",
-            "title": "Olivia",
+            "title": "ON SALE",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": true,
+            "block_link": ""
+          }
+        },
+        "image_8Q6AaV": {
+          "type": "image",
+          "settings": {
+            "subheading": "",
+            "title": "PET ESSENTIALS",
             "text": "",
             "link_label": "",
             "link": "",
@@ -631,8 +632,8 @@
       "block_order": [
         "image_YXUiLD",
         "image_NmtqBX",
-        "image_8Q6AaV",
-        "image_a3egdf"
+        "image_a3egdf",
+        "image_8Q6AaV"
       ],
       "settings": {
         "columns_desktop": 4,
