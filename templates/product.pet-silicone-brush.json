@@ -26,6 +26,7 @@
         },
         "9d13a60b-74d6-49dd-8c6d-69f8ada627d7": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "<div style=\"display:flex;\">\n <p> <img src=\"https://cdn-icons-png.flaticon.com/512/709/709612.png\" style=\"height:20px; width:20px;\">\n <span style=\"margin-left:5px;\"> <script>\n    let randomNumber = Math.floor(Math.random() * (9 - 3 + 1) + 6);\n    document.write(randomNumber);\n  </script> watching this item.\n   </span>\n </p>\n</div>"
           }
@@ -65,6 +66,7 @@
         },
         "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
           "type": "side_panel",
+          "disabled": true,
           "settings": {
             "side_panel_1_label": "Feeding",
             "side_panel_1_icon": "serving_dish",
