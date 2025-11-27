@@ -64,6 +64,7 @@
     "show_products_vendor": false,
     "show_products_swatches": false,
     "show_products_rating": false,
+    "badge_corner_radius": 1,
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
