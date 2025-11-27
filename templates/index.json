@@ -477,6 +477,52 @@
         "disable_bottom_spacing": false
       }
     },
+    "testimonials_rNnwqF": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_wimMLp": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
+          }
+        },
+        "quote_n84fMw": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
+          }
+        },
+        "quote_Tdm7wK": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
+          }
+        }
+      },
+      "block_order": [
+        "quote_wimMLp",
+        "quote_n84fMw",
+        "quote_Tdm7wK"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "full_width": true,
+        "text_size": "medium",
+        "pagination": "dots",
+        "autoplay": true,
+        "autoplay_length": 5,
+        "color_bg": "transparent",
+        "color_text": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "image_with_text_overlay_7gjf94": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -525,7 +571,7 @@
         "text_alignment": "center",
         "overlay_opacity": 48,
         "disable_top_spacing": true,
-        "disable_bottom_spacing": false
+        "disable_bottom_spacing": true
       }
     },
     "gallery_fVYFiT": {
@@ -612,6 +658,7 @@
     "1764060580a2745ace",
     "featured_collection_QqVeNi",
     "collection_list_FaLtCA",
+    "testimonials_rNnwqF",
     "image_with_text_overlay_7gjf94",
     "gallery_fVYFiT"
   ]
