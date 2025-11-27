@@ -451,6 +451,32 @@
         "disable_bottom_spacing": true
       }
     },
+    "collection_list_FaLtCA": {
+      "type": "collection-list",
+      "settings": {
+        "heading": "Explore Products by Category",
+        "heading_left": false,
+        "description": "<p>Discover a curated selection of top-quality products as you explore our diverse categories. </p>",
+        "full_width": true,
+        "collection_list": [
+          "bestsellers",
+          "new-arrivals",
+          "test-2",
+          "test-1"
+        ],
+        "image_ratio": "adapt",
+        "layout": "grid",
+        "style": "style1",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_progress_bar": true,
+        "mobile_swipe": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "testimonials_rNnwqF": {
       "type": "testimonials",
       "blocks": {
@@ -493,32 +519,6 @@
         "autoplay_length": 5,
         "color_bg": "#0900b5",
         "color_text": "#ffffff",
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
-    "collection_list_FaLtCA": {
-      "type": "collection-list",
-      "settings": {
-        "heading": "Explore Products by Category",
-        "heading_left": false,
-        "description": "<p>Discover a curated selection of top-quality products as you explore our diverse categories. </p>",
-        "full_width": true,
-        "collection_list": [
-          "bestsellers",
-          "new-arrivals",
-          "test-2",
-          "test-1"
-        ],
-        "image_ratio": "adapt",
-        "layout": "grid",
-        "style": "style1",
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "show_progress_bar": true,
-        "mobile_swipe": false,
-        "overlay_color": "#000000",
-        "overlay_opacity": 30,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
       }
@@ -662,8 +662,8 @@
     "1763841591de1c40bb",
     "1764060580a2745ace",
     "featured_collection_QqVeNi",
-    "testimonials_rNnwqF",
     "collection_list_FaLtCA",
+    "testimonials_rNnwqF",
     "image_with_text_overlay_7gjf94",
     "gallery_fVYFiT"
   ]
