@@ -581,8 +581,9 @@
         "image_YXUiLD": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/dog-models-dragon-wings-costume.jpg",
             "subheading": "",
-            "title": "Sophia",
+            "title": "Dog Accessories",
             "text": "",
             "link_label": "",
             "link": "",
@@ -635,7 +636,7 @@
       ],
       "settings": {
         "columns_desktop": 4,
-        "section_width": "full-width-row",
+        "section_width": "full-width-row-full",
         "mobile_swipe": false,
         "image_ratio": "square",
         "content_position": "bottom-left",
