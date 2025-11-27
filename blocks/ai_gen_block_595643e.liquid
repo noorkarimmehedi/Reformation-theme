@@ -102,6 +102,9 @@
 
   .ai-featured-collection__product-title-{{ ai_gen_id }} {
     font-size: {{ block.settings.title_font_size }}px;
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
     margin: 0;
     color: {{ block.settings.product_name_color }};
     text-decoration: none;
@@ -151,7 +154,9 @@
     border-radius: {{ block.settings.button_border_radius }}px;
     cursor: pointer;
     font-size: {{ block.settings.button_font_size }}px;
-    font-weight: 600;
+    font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+    font-weight: {{ block.settings.button_font.weight }};
+    font-style: {{ block.settings.button_font.style }};
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: opacity 0.3s ease;
@@ -540,6 +545,12 @@
       "content": "Product title"
     },
     {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Font",
+      "default": "assistant_n4"
+    },
+    {
       "type": "color",
       "id": "product_name_color",
       "label": "Color",
@@ -614,6 +625,12 @@
       "id": "button_text",
       "label": "Text",
       "default": "Add to cart"
+    },
+    {
+      "type": "font_picker",
+      "id": "button_font",
+      "label": "Font",
+      "default": "assistant_n4"
     },
     {
       "type": "color",
