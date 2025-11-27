@@ -158,7 +158,7 @@
         "heading_left": true,
         "description": "<p>Combine your style with these products</p>",
         "full_width": true,
-        "mobile_swipe": true,
+        "mobile_swipe": false,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
       }
