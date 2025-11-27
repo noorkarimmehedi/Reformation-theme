@@ -1358,8 +1358,8 @@
 /* Target the dynamic checkout button container */
 .shopify-payment-button .shopify-payment-button__button--unbranded,
 .shopify-payment-button .shopify-payment-button__button {
-  min-height: 52px !important;
-  height: 52px !important;
+  min-height: 42px !important;
+  height: 42px !important;
   padding: 0 15px !important;
   display: flex !important;
   align-items: center !important;
