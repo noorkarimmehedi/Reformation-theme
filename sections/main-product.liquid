@@ -1,87 +1,4 @@
 {{- 'product.css' | asset_url | stylesheet_tag -}}
-<style>
-  .product-thumbnails {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 12px 0;
-    margin-top: 12px;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .product-thumbnail {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-    background: none;
-    padding: 0;
-    transition: border-color 0.2s ease;
-  }
-  
-  .product-thumbnail.active {
-    border-color: #000;
-  }
-  
-  .product-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  
-  .mobile-only {
-    display: none;
-  }
-  
-  @media screen and (max-width: 749px) {
-    .mobile-only {
-      display: flex;
-    }
-  }
-  
-  @media screen and (min-width: 750px) {
-    .product-thumbnails {
-      display: none;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const thumbnails = document.querySelectorAll('.product-thumbnail');
-    const slides = document.querySelectorAll('.product-images__slide');
-    
-    thumbnails.forEach((thumbnail, index) => {
-      thumbnail.addEventListener('click', function() {
-        const mediaId = this.getAttribute('data-media-id');
-        
-        // Remove active class from all thumbnails and slides
-        thumbnails.forEach(t => t.classList.remove('active'));
-        slides.forEach(s => s.classList.remove('is-active'));
-        
-        // Add active class to clicked thumbnail
-        this.classList.add('active');
-        
-        // Find and activate corresponding slide
-        const targetSlide = document.getElementById('Slide-' + mediaId.replace('{{ section.id }}-', ''));
-        if (targetSlide) {
-          targetSlide.classList.add('is-active');
-        }
-        
-        // Find slide by media-id attribute
-        const slideByDataAttr = document.querySelector(`[data-media-id="${mediaId}"]`);
-        if (slideByDataAttr) {
-          slideByDataAttr.classList.add('is-active');
-        }
-      });
-    });
-  });
-</script>
-
 {%- liquid
 	assign first_3d_model = product.media | where: "media_type", "model" | first
 	assign full_width = section.settings.full_width
@@ -255,28 +172,6 @@
 							</div>
 							{%- endunless -%}
 						{%- endif -%}
-						{%- unless single_media_visible_mobile -%}
-						<div class="product-thumbnails mobile-only">
-							{%- for media in product.media -%}
-								{%- if media.media_type == 'image' -%}
-								<button
-									type="button"
-									class="product-thumbnail {% if forloop.index == 1 %}active{% endif %}"
-									data-media-id="{{ section.id }}-{{ media.id }}"
-									aria-label="Load image {{ forloop.index }}"
-								>
-									<img 
-										src="{{ media.preview_image | image_url: width: 120 }}" 
-										alt="{{ media.preview_image.alt | split: '#' | first | escape }}"
-										loading="lazy"
-										width="60"
-										height="60"
-									>
-								</button>
-								{%- endif -%}
-							{%- endfor -%}
-						</div>
-						{%- endunless -%}
 					</div>
 		    </div>
 		    <div class="product-information">
