@@ -517,8 +517,8 @@
         "pagination": "dots",
         "autoplay": true,
         "autoplay_length": 5,
-        "color_bg": "transparent",
-        "color_text": "#151515",
+        "color_bg": "#0900b5",
+        "color_text": "#ffffff",
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
       }
