@@ -512,7 +512,7 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "full_width": true,
+        "full_width": false,
         "text_size": "medium",
         "pagination": "dots",
         "autoplay": true,
@@ -562,7 +562,7 @@
         "button_9hn7Wg"
       ],
       "settings": {
-        "section_width": "full-width-row-full",
+        "section_width": "full-width-row",
         "image": "shopify://shop_images/imgi_448_Dog-Show-webpage-header-background-1.png",
         "image_parallax": false,
         "desktop_height": "desktop-height-650",
@@ -639,7 +639,7 @@
       ],
       "settings": {
         "columns_desktop": 4,
-        "section_width": "full-width-row-full",
+        "section_width": "full-width-row",
         "mobile_swipe": false,
         "image_ratio": "square",
         "content_position": "bottom-left",
