@@ -239,7 +239,7 @@
             "heading": "Featured collection",
             "collection": "all-products",
             "products_to_show": 8,
-            "grid_gap_mobile": 20,
+            "grid_gap_mobile": 10,
             "grid_gap_desktop": 30,
             "desktop_side_padding": 40,
             "section_padding_top": 40,
