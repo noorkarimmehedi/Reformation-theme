@@ -226,7 +226,7 @@
         "mobile_swipe": false,
         "show_progress_bar": true,
         "disable_top_spacing": false,
-        "disable_bottom_spacing": false
+        "disable_bottom_spacing": true
       }
     },
     "46322c5c-3347-49a0-b4b9-a5f2ad634b2c": {
@@ -340,6 +340,7 @@
       "block_order": [
         "ai_gen_block_ac82f35_byVcX4"
       ],
+      "disabled": true,
       "settings": {}
     },
     "1764060580a2745ace": {
