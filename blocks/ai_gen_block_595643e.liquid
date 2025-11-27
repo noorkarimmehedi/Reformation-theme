@@ -1,7 +1,11 @@
-{% doc %}
-  @prompt
-    build me a featured collection section where there should be two product in one row in mobile version and in desktop version there should be four products. the product name compared pricing and pricing and add to cart button color text background color should be customizable, i want just the product title pricing and add to cart button card should be customizable from color to size not whole section, in every prooduct card the title pricing and add to cart button should be in same position on mobile version so that it look beautiful, the pricing still not in same position in every product card. also i don't want any border radius in product photo, the gap bwteen cards should be adjustable and add to cart should be working and also there is a gap on left and right side on desktop version reduce that gap, still there is a gap on left and right on desktop version reduce that. also i want a customizable border color for add to cart button , i want little bit gap on left and right side on desktop version just a little bit. also i want customizaton option for top and bottom padding
-{% enddoc %}
+{% comment %}
+  Featured Collection Section
+  - Mobile: 2 products per row
+  - Desktop: 4 products per row
+  - Customizable product cards with borders and shadows
+  - Working add to cart functionality
+{% endcomment %}
+
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -87,6 +91,13 @@
     padding: {{ block.settings.card_padding }}px;
     background-color: {{ block.settings.card_background }};
     border-radius: {{ block.settings.card_border_radius }}px;
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | divided_by: 100.0 }});
+    transition: border-color 0.3s ease;
+  }
+
+  .ai-featured-collection__product-{{ ai_gen_id }}:hover .ai-featured-collection__info-{{ ai_gen_id }} {
+    border-color: {{ block.settings.card_border_hover_color }};
   }
 
   .ai-featured-collection__product-title-{{ ai_gen_id }} {
@@ -447,6 +458,72 @@
       "unit": "px",
       "label": "Border radius",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "color",
+      "id": "card_border_hover_color",
+      "label": "Hover border color",
+      "default": "#CCCCCC"
+    },
+    {
+      "type": "header",
+      "content": "Card shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Blur radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Shadow opacity",
+      "default": 10
     },
     {
       "type": "header",
