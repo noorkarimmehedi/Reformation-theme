@@ -1360,7 +1360,7 @@
 .shopify-payment-button .shopify-payment-button__button {
   min-height: 52px !important;
   height: 52px !important;
-  padding: 0 0px !important;
+  padding: 0 15px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1371,7 +1371,7 @@
 .shopify-payment-button .shopify-payment-button__more-options {
   min-height: 52px !important;
   height: 52px !important;
-  padding: 0 24px !important;
+  padding: 0 15px !important;
   line-height: 52px !important;
 }
 
