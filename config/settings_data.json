@@ -11,7 +11,7 @@
   "current": {
     "heading_font": "bayon_n4",
     "heading_font_scale": 100,
-    "body_font": "sofia_sans_n4",
+    "body_font": "source_sans_pro_n4",
     "body_font_scale": 100,
     "body_font_line_height_scale": 100,
     "navigation_font_scale": 100,
@@ -56,6 +56,7 @@
     "social_share_pinterest": false,
     "product_content_alignment": "center",
     "product_aspect_ratio": "adapt",
+    "products_hover_images": true,
     "products_hover_images_count": 3,
     "products_hover_dots": true,
     "enable_quick_add": true,
