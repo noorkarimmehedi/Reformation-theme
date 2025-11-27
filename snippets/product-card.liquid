@@ -30,6 +30,22 @@
 -%}
 
 <style>
+/* Product Card Border & Shadow Styles */
+.product-card {
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  border-color: #CCCCCC;
+}
+
 /* Truncate product title to two lines with ellipsis */
 .product-card-title {
   display: -webkit-box;
@@ -44,17 +60,12 @@
 }
 
 /* Ensure consistent card height and button alignment */
-.product-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .product-card-info {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   min-height: 0;
+  padding: 12px;
 }
 
 /* Push the add to cart button to the bottom */
