@@ -607,6 +607,7 @@
         "image_a3egdf": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/ON_SALE.png",
             "subheading": "",
             "title": "ON SALE",
             "text": "",
