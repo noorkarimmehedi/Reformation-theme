@@ -1369,8 +1369,8 @@
 
 /* More options button */
 .shopify-payment-button .shopify-payment-button__more-options {
-  min-height: 52px !important;
-  height: 52px !important;
+  min-height: 30px !important;
+  height: 30px !important;
   padding: 0 15px !important;
   line-height: 52px !important;
 }
