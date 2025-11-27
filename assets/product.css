@@ -1353,48 +1353,42 @@
         flex: 0 0 100%;
         max-width: 100%; } }
 
-        /* Add this CSS to your theme's custom CSS or in a separate CSS file */
+        /* More specific selectors for dynamic checkout buttons */
 
-/* Fix dynamic checkout button heights to match regular buttons */
-.shopify-payment-button__button {
-  min-height: 50px !important; /* Adjust this value to match your Add to Cart button */
-  padding-top: 14px !important;
-  padding-bottom: 14px !important;
-  border-radius: 0 !important; /* Match your theme's button border radius */
-}
-
-/* Specific fix for Apple Pay button */
-.shopify-payment-button__button--unbranded {
-  min-height: 50px !important;
-  height: auto !important;
-  padding: 14px 20px !important;
-}
-
-/* Fix for the button container */
-.shopify-payment-button__button--hidden {
-  display: none !important;
-}
-
-.shopify-payment-button {
-  margin-top: 10px; /* Add space between buttons */
-}
-
-/* Alternative: Match the exact height of your Add to Cart button */
-.product-form__submit {
-  min-height: 50px; /* Your regular button height */
-}
-
-.shopify-payment-button__button,
-.shopify-payment-button__button--unbranded {
-  min-height: 50px !important; /* Match the above value */
-  line-height: 1.4 !important;
-}
-
-/* For better visual consistency */
-.shopify-payment-button__more-options {
-  margin-top: 10px;
-  min-height: 50px !important;
+/* Target the dynamic checkout button container */
+.shopify-payment-button .shopify-payment-button__button--unbranded,
+.shopify-payment-button .shopify-payment-button__button {
+  min-height: 52px !important;
+  height: 52px !important;
+  padding: 0 24px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  line-height: normal !important;
+}
+
+/* More options button */
+.shopify-payment-button .shopify-payment-button__more-options {
+  min-height: 52px !important;
+  height: 52px !important;
+  padding: 0 24px !important;
+  line-height: 52px !important;
+}
+
+/* Additional specificity for stubborn buttons */
+div.shopify-payment-button button.shopify-payment-button__button {
+  min-height: 52px !important;
+  height: 52px !important;
+}
+
+/* If buttons are inside iframe (some payment methods) */
+.shopify-payment-button iframe {
+  min-height: 52px !important;
+  height: 52px !important;
+}
+
+/* Ensure proper spacing */
+.product-form__submit + .shopify-payment-button,
+.shopify-payment-button {
+  margin-top: 12px !important;
 }
