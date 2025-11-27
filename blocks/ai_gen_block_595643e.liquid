@@ -17,7 +17,7 @@
   .ai-featured-collection__container-{{ ai_gen_id }} {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 {{ block.settings.mobile_side_padding }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -372,6 +372,16 @@
       "unit": "px",
       "label": "Gap between cards on desktop",
       "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_side_padding",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile side padding",
+      "default": 10
     },
     {
       "type": "range",
