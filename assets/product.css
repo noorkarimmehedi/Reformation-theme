@@ -1393,45 +1393,58 @@ div.shopify-payment-button button.shopify-payment-button__button {
   margin-top: 12px !important;
 }
 
-/* Add this CSS to hide the "More payment options" button */
-
 /* Hide the more options button */
 .shopify-payment-button__more-options {
   display: none !important;
 }
 
-/* Optional: Also hide if there's a button element */
-button.shopify-payment-button__more-options {
-  display: none !important;
-}
+/* Remove ALL gaps below payment buttons - Comprehensive solution */
 
-/* Clean up any extra spacing left behind */
-.shopify-payment-button {
-  margin-bottom: 0 !important;
-}
-
-/* Remove gap below all payment buttons */
+/* Target all button containers */
 .product-form__buttons,
+.product-form__buttons > *,
 .product-form__submit,
-.shopify-payment-button {
+.shopify-payment-button,
+.shopify-payment-button > *,
+.shopify-payment-button__button,
+.product-single__form,
+form[action*="/cart/add"] {
   margin-bottom: 0 !important;
-}
-
-/* Remove padding from button containers */
-.product-single__form .shopify-payment-button,
-.product-form .shopify-payment-button {
   padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
 }
 
-/* Target the entire button area wrapper */
-.product-form__buttons {
+/* Target specific Shopify payment button wrappers */
+.shopify-payment-button__skeleton,
+.shopify-payment-button-wrapper {
+  margin-bottom: 0 !important;
   padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
 }
 
-/* Remove any bottom spacing from Buy Buttons block */
+/* Remove spacing from the buy buttons block */
+[data-block-type="buy_buttons"],
 .product-information [data-block-type="buy_buttons"] {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+/* Target any fieldset that might contain buttons */
+.product-form fieldset,
+.product-form__input {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove line-height spacing */
+.shopify-payment-button {
+  line-height: 1 !important;
+}
+
+/* Force remove any ::after pseudo elements that might create space */
+.shopify-payment-button::after,
+.product-form__buttons::after {
+  display: none !important;
+  content: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
 }
