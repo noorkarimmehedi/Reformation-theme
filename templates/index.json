@@ -214,9 +214,9 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "Featured Collection",
+        "heading": "BEST SELLERS",
         "heading_left": false,
-        "description": "<p>Describe your featured collection here</p>",
+        "description": "<p>Discover our Best seller collection here</p>",
         "full_width": true,
         "collection": "all-products",
         "display_type": "grid",
