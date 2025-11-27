@@ -1352,3 +1352,49 @@
       .product-recommendations.swipe-on-mobile .products.row .columns {
         flex: 0 0 100%;
         max-width: 100%; } }
+
+        /* Add this CSS to your theme's custom CSS or in a separate CSS file */
+
+/* Fix dynamic checkout button heights to match regular buttons */
+.shopify-payment-button__button {
+  min-height: 50px !important; /* Adjust this value to match your Add to Cart button */
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  border-radius: 0 !important; /* Match your theme's button border radius */
+}
+
+/* Specific fix for Apple Pay button */
+.shopify-payment-button__button--unbranded {
+  min-height: 50px !important;
+  height: auto !important;
+  padding: 14px 20px !important;
+}
+
+/* Fix for the button container */
+.shopify-payment-button__button--hidden {
+  display: none !important;
+}
+
+.shopify-payment-button {
+  margin-top: 10px; /* Add space between buttons */
+}
+
+/* Alternative: Match the exact height of your Add to Cart button */
+.product-form__submit {
+  min-height: 50px; /* Your regular button height */
+}
+
+.shopify-payment-button__button,
+.shopify-payment-button__button--unbranded {
+  min-height: 50px !important; /* Match the above value */
+  line-height: 1.4 !important;
+}
+
+/* For better visual consistency */
+.shopify-payment-button__more-options {
+  margin-top: 10px;
+  min-height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
