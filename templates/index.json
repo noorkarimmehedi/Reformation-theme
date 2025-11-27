@@ -635,7 +635,7 @@
       ],
       "settings": {
         "columns_desktop": 4,
-        "section_width": "full-width-row",
+        "section_width": "full-width-row-full",
         "mobile_swipe": false,
         "image_ratio": "square",
         "content_position": "bottom-left",
