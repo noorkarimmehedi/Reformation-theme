@@ -286,7 +286,6 @@
     },
     "featured_collection_slider_TUVm6c": {
       "type": "featured-collection-slider",
-      "disabled": true,
       "name": "Collection Slider",
       "settings": {
         "collection": "all-products",
@@ -294,7 +293,7 @@
         "heading": "Featured Collection",
         "heading_color": "#000000",
         "accent_color": "#ff6b35",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "show_description": true,
         "button_text": "View Product",
         "show_view_all": true,
