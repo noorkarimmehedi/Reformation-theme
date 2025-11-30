@@ -1,0 +1,629 @@
+{% comment %}
+  Featured Collection Slider – Shopify Section
+  Center-mode product showcase with expansion effect
+  Based on Pro v5-b by Kan3an
+{% endcomment %}
+
+<section class="featured-collection-slider" data-section-id="{{ section.id }}">
+  <div class="slider-head">
+    <h2 class="slider-heading">{{ section.settings.heading }}</h2>
+
+    <div class="slider-controls">
+      <button id="prev-{{ section.id }}" class="slider-nav-btn" aria-label="Previous">‹</button>
+      <button id="next-{{ section.id }}" class="slider-nav-btn" aria-label="Next">›</button>
+    </div>
+  </div>
+
+  <div class="slider-wrapper">
+    <div class="slider-track" id="track-{{ section.id }}">
+      {% assign collection = collections[section.settings.collection] %}
+      {% assign product_limit = section.settings.products_to_show %}
+      
+      {% for product in collection.products limit: product_limit %}
+        <article class="product-card" {% if forloop.first %}active{% endif %}>
+          {% if product.featured_image %}
+            {{ product.featured_image | image_url: width: 1200 | image_tag: class: 'product-card__bg', alt: product.title }}
+          {% else %}
+            <div class="product-card__bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+          {% endif %}
+          
+          <div class="product-card__content">
+            {% if product.images[1] %}
+              {{ product.images[1] | image_url: width: 480 | image_tag: class: 'product-card__thumb', alt: product.title }}
+            {% elsif product.featured_image %}
+              {{ product.featured_image | image_url: width: 480 | image_tag: class: 'product-card__thumb', alt: product.title }}
+            {% endif %}
+            
+            <div class="product-card__info">
+              <h3 class="product-card__title">{{ product.title }}</h3>
+              
+              <div class="product-card__price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                  <span class="price-sale">{{ product.price | money }}</span>
+                {% else %}
+                  <span class="price-regular">{{ product.price | money }}</span>
+                {% endif %}
+              </div>
+              
+              {% if section.settings.show_description and product.description != blank %}
+                <p class="product-card__desc">{{ product.description | strip_html | truncate: 120 }}</p>
+              {% endif %}
+              
+              <a href="{{ product.url }}" class="product-card__btn">
+                {{ section.settings.button_text }}
+              </a>
+            </div>
+          </div>
+        </article>
+      {% else %}
+        {% comment %} Show placeholder products if collection is empty {% endcomment %}
+        {% for i in (1..5) %}
+          <article class="product-card" {% if forloop.first %}active{% endif %}>
+            <div class="product-card__bg" style="background: linear-gradient(135deg, #{{ forloop.index }}67eea 0%, #764ba2 100%);"></div>
+            <div class="product-card__content">
+              <div class="product-card__thumb" style="background: #ddd;"></div>
+              <div class="product-card__info">
+                <h3 class="product-card__title">Product {{ i }}</h3>
+                <div class="product-card__price">
+                  <span class="price-regular">$99.00</span>
+                </div>
+                <p class="product-card__desc">This is a placeholder product. Select a collection to display real products.</p>
+                <a href="#" class="product-card__btn">View Product</a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="slider-dots" id="dots-{{ section.id }}"></div>
+  
+  {% if section.settings.show_view_all %}
+    <div class="slider-footer">
+      <a href="{{ collection.url }}" class="view-all-btn">
+        View All Products
+      </a>
+    </div>
+  {% endif %}
+</section>
+
+<style>
+  .featured-collection-slider {
+    --gap: 1.25rem;
+    --speed: 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --closed: 5rem;
+    --open: 30rem;
+    --accent: {{ section.settings.accent_color }};
+    background: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .slider-head {
+    max-width: 1400px;
+    margin: auto;
+    padding: 70px 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+
+  .slider-heading {
+    font: 400 1.5rem/1.2 var(--font-heading-family, sans-serif);
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .slider-heading {
+      font-size: 2.25rem;
+    }
+  }
+
+  .slider-nav-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .slider-nav-btn:hover {
+    background: var(--accent);
+  }
+
+  .slider-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .slider-wrapper {
+    max-width: 1400px;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .slider-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .slider-track {
+    display: flex;
+    gap: var(--gap);
+    align-items: flex-start;
+    justify-content: center;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 40px;
+  }
+
+  .slider-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-card {
+    position: relative;
+    flex: 0 0 var(--closed);
+    height: 26rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex-basis var(--speed), transform var(--speed);
+  }
+
+  .product-card[active] {
+    flex-basis: var(--open);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+  }
+
+  .product-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75) saturate(75%);
+    transition: filter 0.3s, transform var(--speed);
+  }
+
+  .product-card:hover .product-card__bg {
+    filter: brightness(0.9) saturate(100%);
+    transform: scale(1.06);
+  }
+
+  .product-card__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0;
+    background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+    z-index: 2;
+  }
+
+  .product-card__title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.35rem;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    margin: 0;
+  }
+
+  .product-card__thumb,
+  .product-card__info > *:not(.product-card__title) {
+    display: none;
+  }
+
+  .product-card[active] .product-card__content {
+    flex-direction: row;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    gap: 1.1rem;
+  }
+
+  .product-card[active] .product-card__title {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card[active] .product-card__thumb,
+  .product-card[active] .product-card__info > * {
+    display: block;
+  }
+
+  .product-card__thumb {
+    width: 133px;
+    height: 269px;
+    border-radius: 0.45rem;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .product-card__price {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .price-regular,
+  .price-sale {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .price-sale {
+    color: var(--accent);
+  }
+
+  .price-compare {
+    color: #999;
+    font-size: 1.1rem;
+    text-decoration: line-through;
+  }
+
+  .product-card__desc {
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 16rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .product-card__btn {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    border-radius: 9999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+  }
+
+  .product-card__btn:hover {
+    background: #ff824f;
+    transform: translateY(-2px);
+  }
+
+  .slider-dots {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .slider-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .slider-dot.active {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+
+  .slider-footer {
+    text-align: center;
+    padding: 20px 0 0;
+  }
+
+  .view-all-btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 2px solid var(--accent);
+    border-radius: 9999px;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .view-all-btn:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  @media (max-width: 767px) {
+    .featured-collection-slider {
+      --closed: 100%;
+      --open: 100%;
+      --gap: 0.8rem;
+    }
+
+    .slider-head {
+      padding: 30px 15px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .slider-wrapper {
+      padding: 0 15px;
+    }
+
+    .slider-track {
+      flex-direction: column;
+      scroll-snap-type: y mandatory;
+      gap: 0.8rem;
+      padding-bottom: 20px;
+    }
+
+    .product-card {
+      height: auto;
+      min-height: 80px;
+      flex: 0 0 auto;
+      width: 100%;
+      scroll-snap-align: start;
+    }
+
+    .product-card[active] {
+      min-height: 350px;
+      transform: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-card__content {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 1rem;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .product-card__title {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: 1.2rem;
+      margin-right: auto;
+    }
+
+    .product-card[active] .product-card__content {
+      align-items: flex-start;
+      padding: 1.5rem;
+      flex-direction: column;
+    }
+
+    .product-card[active] .product-card__title {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .product-card[active] .product-card__thumb {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      aspect-ratio: 1/1.5;
+      margin: 0 auto 1rem;
+    }
+
+    .product-card[active] .product-card__desc {
+      font-size: 0.9rem;
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .product-card[active] .product-card__btn {
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+    }
+
+    .slider-dots {
+      display: none;
+    }
+
+    .slider-controls {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .slider-nav-btn {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1.2rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const track = document.getElementById('track-' + sectionId);
+    const wrap = track.parentElement;
+    const cards = Array.from(track.children);
+    const prev = document.getElementById('prev-' + sectionId);
+    const next = document.getElementById('next-' + sectionId);
+    const dotsBox = document.getElementById('dots-' + sectionId);
+    const isMobile = () => matchMedia('(max-width:767px)').matches;
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'slider-dot';
+      dot.onclick = () => activate(i, true);
+      dotsBox.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsBox.children);
+    let current = 0;
+
+    function center(i) {
+      const card = cards[i];
+      const axis = isMobile() ? 'top' : 'left';
+      const size = isMobile() ? 'clientHeight' : 'clientWidth';
+      const start = isMobile() ? card.offsetTop : card.offsetLeft;
+      wrap.scrollTo({
+        [axis]: start - (wrap[size] / 2 - card[size] / 2),
+        behavior: 'smooth'
+      });
+    }
+
+    function toggleUI(i) {
+      cards.forEach((c, k) => c.toggleAttribute('active', k === i));
+      dots.forEach((d, k) => d.classList.toggle('active', k === i));
+      prev.disabled = i === 0;
+      next.disabled = i === cards.length - 1;
+    }
+
+    function activate(i, scroll) {
+      if (i === current) return;
+      current = i;
+      toggleUI(i);
+      if (scroll) center(i);
+    }
+
+    function go(step) {
+      activate(Math.min(Math.max(current + step, 0), cards.length - 1), true);
+    }
+
+    prev.onclick = () => go(-1);
+    next.onclick = () => go(1);
+
+    addEventListener('keydown', (e) => {
+      if (['ArrowRight', 'ArrowDown'].includes(e.key)) go(1);
+      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) go(-1);
+    }, { passive: true });
+
+    cards.forEach((card, i) => {
+      card.addEventListener('mouseenter', () => 
+        matchMedia('(hover:hover)').matches && activate(i, true)
+      );
+      card.addEventListener('click', () => activate(i, true));
+    });
+
+    let sx = 0, sy = 0;
+    track.addEventListener('touchstart', (e) => {
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - sx;
+      const dy = e.changedTouches[0].clientY - sy;
+      if (isMobile() ? Math.abs(dy) > 60 : Math.abs(dx) > 60)
+        go((isMobile() ? dy : dx) > 0 ? -1 : 1);
+    }, { passive: true });
+
+    if (isMobile()) dotsBox.hidden = true;
+    addEventListener('resize', () => center(current));
+    toggleUI(0);
+    center(0);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection Slider",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to Show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#ff6b35"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#07090d"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show Product Description",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' Button",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Slider"
+    }
+  ]
+}
+{% endschema %}
