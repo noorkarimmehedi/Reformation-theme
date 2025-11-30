@@ -125,10 +125,10 @@
   .slider-nav-btn {
     width: 2.5rem;
     height: 2.5rem;
-    border: none;
+    border: 1px solid #E0E0E0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: #FFFFFF;
+    color: #000000;
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -139,6 +139,8 @@
 
   .slider-nav-btn:hover {
     background: var(--accent);
+    color: #FFFFFF;
+    border-color: var(--accent);
   }
 
   .slider-nav-btn:disabled {
@@ -175,16 +177,22 @@
     position: relative;
     flex: 0 0 var(--closed);
     height: 26rem;
-    border-radius: 1rem;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: flex-basis var(--speed), transform var(--speed);
+    border: 1px solid #E0E0E0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    transition: flex-basis var(--speed), transform var(--speed), border-color 0.3s;
+  }
+
+  .product-card:hover {
+    border-color: #CCCCCC;
   }
 
   .product-card[active] {
     flex-basis: var(--open);
     transform: translateY(-6px);
-    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
   }
 
   .product-card__bg {
@@ -386,7 +394,8 @@
     .product-card[active] {
       min-height: 350px;
       transform: none;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+      border-color: #CCCCCC;
     }
 
     .product-card__content {
@@ -567,7 +576,7 @@
       "type": "color",
       "id": "heading_color",
       "label": "Heading Color",
-      "default": "#ffffff"
+      "default": "#000000"
     },
     {
       "type": "color",
@@ -579,7 +588,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#07090d"
+      "default": "#FFFFFF"
     },
     {
       "type": "checkbox",
